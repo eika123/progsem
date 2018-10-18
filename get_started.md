@@ -30,18 +30,49 @@ Dersom du ønsker å utføre heltallsdivisjon, bruker du to skråstreker.
 F.eks
 
 ```
-In [25]: 27/5
+In [25]: 27/5   # For sammenligning
 Out[25]: 5.4
 
 In [26]: 27//5
 Out[26]: 5
 ```
+Merk at tekst som kommer til høyre for tegnet `#` er en kommentar, og blir ignorert av python
 
 Ønsker du å vite resten fra en divisjon, bruker du tegnet `%` for modulo:
 
 ```
 In [27]: 27 % 5
 Out[27]: 2
+```
+
+## Kommentarer
+Vi kan kommentere koden vår. Vi kan gjøre dette ved å strive tekst til høyre for en
+hashtag `#`.
+
+```
+In [44]: # Dette er en kommentar, og blir ignorert av python
+
+In [45]: smartvar = 5.0 + 3.4
+
+In [46]: smartvar
+Out[46]: 8.4
+```
+
+Dersom vi behøver lengre kommentarer i script, kan vi bruke tre streng-tegn, og
+lage en såkalt **doc-string**.
+
+```
+"""
+Dette er en lang kommentar.
+Den kan strekke seg over flere linjer
+Det er nyttig når man skriver kompliserte programmer og
+trenger fyldig dokumentasjon
+"""
+
+a = 5
+b = 8
+
+c = a*b
 ```
 
 ## Variable
@@ -80,11 +111,19 @@ enhet som har tilhørende metoder for å vise informasjon om dataene objektet in
 I ipython kan du gjøre dette f.eks med følgende kode
 
 ```
-In [1]: a = 5.0
+In [32]: a = 5.0
 
-In [2]: a.
+In [33]: a.
 ```
 trykker du på `tab`-tasten kommer det flere forslag.
+
+Strenger har mange flere innebygde metoder, blant annet `upper`.
+```
+In [37]: b = "tekst"
+
+In [38]: b.upper()
+Out[38]: 'TEKST'
+```
 
 Såkalt objektorientert programmering dreier seg om å definere egne objekter med tilhørende metoder. Dette er neppe aktuelt i VGS med det første.
 
@@ -109,6 +148,32 @@ stringlist[1:5]
 Out[9]: ['b', 'c', 'd', 'e']
 ```
 
-Andre måter å indeksere data på i python er numpy-arrays og dictionaries.
+
+Lister kan inneholder objekter av ulike typer:
+
+```
+In [39]: mixedlist = ['a', 5, 5.2, 'b', 'c']
+
+In [40]: mixedlist[3]
+Out[40]: 'b'
+
+In [41]: mixedlist[4]
+Out[41]: 'c'
+```
+
+Siden en liste også er et objekt, kommer den med et sett innebygde metoder.
+En svært nyttig metode er `append`
+
+```
+In [48]: somelist = [0.1, 0.2, 0.3, 0.4]
+
+In [49]: somelist.append(0.5)
+
+In [50]: somelist
+Out[50]: [0.1, 0.2, 0.3, 0.4, 0.5]
+```
+Metoden tilføyer altså et element på slutten av listen.
+
+Andre måter å indeksere data på i python er *numpy-arrays* og *dictionaries*.
 
 

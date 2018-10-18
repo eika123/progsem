@@ -38,11 +38,35 @@ Out[22]: 0.75</code></pre>
 <pre><code>In [23]: 2**4
 Out[23]: 16</code></pre>
 <p>Dersom du ønsker å utføre heltallsdivisjon, bruker du to skråstreker. F.eks</p>
-<pre><code>In [25]: 27/5
+<pre><code>In [25]: 27/5   # For sammenligning
 Out[25]: 5.4
 
 In [26]: 27//5
 Out[26]: 5</code></pre>
+<p>Merk at tekst som kommer til høyre for tegnet <code>#</code> er en kommentar, og blir ignorert av python</p>
+<p>Ønsker du å vite resten fra en divisjon, bruker du tegnet <code>%</code> for modulo:</p>
+<pre><code>In [27]: 27 % 5
+Out[27]: 2</code></pre>
+<h2 id="kommentarer">Kommentarer</h2>
+<p>Vi kan kommentere koden vår. Vi kan gjøre dette ved å strive tekst til høyre for en hashtag <code>#</code>.</p>
+<pre><code>In [44]: # Dette er en kommentar, og blir ignorert av python
+
+In [45]: smartvar = 5.0 + 3.4
+
+In [46]: smartvar
+Out[46]: 8.4</code></pre>
+<p>Dersom vi behøver lengre kommentarer i script, kan vi bruke tre streng-tegn, og lage en såkalt <strong>doc-string</strong>.</p>
+<pre><code>&quot;&quot;&quot;
+Dette er en lang kommentar.
+Den kan strekke seg over flere linjer
+Det er nyttig når man skriver kompliserte programmer og
+trenger fyldig dokumentasjon
+&quot;&quot;&quot;
+
+a = 5
+b = 8
+
+c = a*b</code></pre>
 <h2 id="variable">Variable</h2>
 <p>Variabelen er navnet vi bruker på en adresse i minnet som holder et objekt.</p>
 <p>I koden under lagres flyttallet <code>5.0</code> i variabelen <code>a</code>.</p>
@@ -64,10 +88,15 @@ Out[16]: 6.27375</code></pre>
 <h2 id="objekter">Objekter</h2>
 <p>Alt i python er objekter. Du kan derfor tenke på alle variable som en ting eller enhet som har tilhørende metoder for å vise informasjon om dataene objektet inneholder.</p>
 <p>I ipython kan du gjøre dette f.eks med følgende kode</p>
-<pre><code>In [1]: a = 5.0
+<pre><code>In [32]: a = 5.0
 
-In [2]: a.</code></pre>
+In [33]: a.</code></pre>
 <p>trykker du på <code>tab</code>-tasten kommer det flere forslag.</p>
+<p>Strenger har mange flere innebygde metoder, blant annet <code>upper</code>.</p>
+<pre><code>In [37]: b = &quot;tekst&quot;
+
+In [38]: b.upper()
+Out[38]: &#39;TEKST&#39;</code></pre>
 <p>Såkalt objektorientert programmering dreier seg om å definere egne objekter med tilhørende metoder. Dette er neppe aktuelt i VGS med det første.</p>
 <h2 id="samling-av-datatyper">Samling av datatyper</h2>
 <p>Python tilbyr flere måter å samle og strukturere data på. Blant disse er listen den enkleste å bruke. Koden under illustrerer hvordan en liste kan lages, og hvordan du kan hente ut informasjon fra listen.</p>
@@ -84,6 +113,22 @@ Out[8]: &#39;f&#39;
 
 stringlist[1:5]
 Out[9]: [&#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]</code></pre>
-<p>Andre måter å indeksere data på i python er numpy-arrays og dictionaries.</p>
+<p>Lister kan inneholder objekter av ulike typer:</p>
+<pre><code>In [39]: mixedlist = [&#39;a&#39;, 5, 5.2, &#39;b&#39;, &#39;c&#39;]
+
+In [40]: mixedlist[3]
+Out[40]: &#39;b&#39;
+
+In [41]: mixedlist[4]
+Out[41]: &#39;c&#39;</code></pre>
+<p>Siden en liste også er et objekt, kommer den med et sett innebygde metoder. En svært nyttig metode er <code>append</code></p>
+<pre><code>In [48]: somelist = [0.1, 0.2, 0.3, 0.4]
+
+In [49]: somelist.append(0.5)
+
+In [50]: somelist
+Out[50]: [0.1, 0.2, 0.3, 0.4, 0.5]</code></pre>
+<p>Metoden tilføyer altså et element på slutten av listen.</p>
+<p>Andre måter å indeksere data på i python er <em>numpy-arrays</em> og <em>dictionaries</em>.</p>
 </body>
 </html>

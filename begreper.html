@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Begreper i programmering og python</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Begreper i programmering og python</h1>
+</header>
+<h2 id="innebygde-datatyper">Innebygde datatyper</h2>
+<p>Datatypene <code>int</code>, <code>float</code> og <code>str</code> for henholdsvis heltall, flyttall(desimaltall) og streng(tekst) er inkludert i python.</p>
+<h3 id="de-fire-regneartene-med-python">De fire regneartene med python</h3>
+<p>Addisjon, subtraksjon, multiplikasjon og divisjon har standard notasjon i python.</p>
+<pre><code>In [19]: 5 + 3
+Out[19]: 8
+
+In [20]: 20 - 5
+Out[20]: 15
+
+In [21]: 3*4
+Out[21]: 12
+
+In [22]: 3/4
+Out[22]: 0.75</code></pre>
+<p>Skal du ta potenser, bruker du følgende syntax:</p>
+<pre><code>In [23]: 2**4
+Out[23]: 16</code></pre>
+<p>Dersom du ønsker å utføre heltallsdivisjon, bruker du to skråstreker. F.eks</p>
+<pre><code>In [25]: 27/5
+Out[25]: 5.4
+
+In [26]: 27//5
+Out[26]: 5</code></pre>
+<h2 id="variable">Variable</h2>
+<p>Variabelen er navnet vi bruker på en adresse i minnet som holder et objekt.</p>
+<p>I koden under lagres flyttallet <code>5.0</code> i variabelen <code>a</code>.</p>
+<pre><code>a = 5.0</code></pre>
+<p>Variabelen <code>a</code> ligger fysisk lagret i minnet på maskinen, og datamaskinen har en adresse til dette stedet. Alt vi behøver å tenke på, er at vi kan nå dette stedet ved å referere til <code>a</code>.</p>
+<p>Vi kan bruke variable til å gjøre matematiske formler mer leselig:</p>
+<pre><code>In [11]: a = -9.81
+
+In [12]: a = -9.81 # gravitasjonskonstant
+
+In [13]: t = 0.5
+
+In [14]: v0 = 15   # utgangshastighet
+
+In [15]: s = v0*t + 0.5*a*t**2
+
+In [16]: s
+Out[16]: 6.27375</code></pre>
+<h2 id="objekter">Objekter</h2>
+<p>Alt i python er objekter. Du kan derfor tenke på alle variable som en ting eller enhet som har tilhørende metoder for å vise informasjon om dataene objektet inneholder.</p>
+<p>I ipython kan du gjøre dette f.eks med følgende kode</p>
+<pre><code>In [1]: a = 5.0
+
+In [2]: a.</code></pre>
+<p>trykker du på <code>tab</code>-tasten kommer det flere forslag.</p>
+<p>Såkalt objektorientert programmering dreier seg om å definere egne objekter med tilhørende metoder. Dette er neppe aktuelt i VGS med det første.</p>
+<h2 id="samling-av-datatyper">Samling av datatyper</h2>
+<p>Python tilbyr flere måter å samle og strukturere data på. Blant disse er listen den enkleste å bruke. Koden under illustrerer hvordan en liste kan lages, og hvordan du kan hente ut informasjon fra listen.</p>
+<pre><code>stringlist = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]
+
+stringlist[0]
+Out[6]: &#39;a&#39;
+
+stringlist[5]
+Out[7]: &#39;f&#39;
+
+stringlist[-1]
+Out[8]: &#39;f&#39;
+
+stringlist[1:5]
+Out[9]: [&#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]</code></pre>
+<p>Andre måter å indeksere data på i python er numpy-arrays og dictionaries.</p>
+</body>
+</html>

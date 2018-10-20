@@ -11,6 +11,10 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
+  <link rel="stylesheet" href="pandoc.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script><script>document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body);
+  });</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css" />
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -21,6 +25,17 @@
 </header>
 <h2 id="innebygde-datatyper">Innebygde datatyper</h2>
 <p>Datatypene <code>int</code>, <code>float</code> og <code>str</code> for henholdsvis heltall, flyttall(desimaltall) og streng(tekst) er inkludert i python.</p>
+<p>Under ser du eksempler på flyttall</p>
+<pre><code>In [1]: 3.14
+Out[1]: 3.14</code></pre>
+<p>Flyttallene skiller seg fra desimaltall i matematikken ved at en datamaskin bare kan representere et endelig antall sifre. I år 2018 kan du forholde deg til 15-16 desimaler etter komma, noe avhengig av hvilken datamaskin du bruker.</p>
+<p>Under ser du to eksempler på strenger:</p>
+<pre><code>In [8]: &quot;Hello World&quot;
+Out[8]: &#39;Hello World&#39;
+
+In [9]: &quot;5.3&quot;
+Out[9]: &#39;5.3&#39;</code></pre>
+<p>I dagligtalen er en streng det samme som tekst. Du har neppe problemer med å se “likheten” mellom strengen <code>&quot;5.3&quot;</code> og flyttallet <code>5.3</code>. I datamaskinen er dette to helt ulike ting, og derfor krever disse objektene også et eget fagbegrep.</p>
 <h3 id="de-fire-regneartene-med-python">De fire regneartene med python</h3>
 <p>Addisjon, subtraksjon, multiplikasjon og divisjon har standard notasjon i python.</p>
 <pre><code>In [19]: 5 + 3
@@ -34,7 +49,7 @@ Out[21]: 12
 
 In [22]: 3/4
 Out[22]: 0.75</code></pre>
-<p>Skal du ta potenser, bruker du følgende syntax:</p>
+<p>Skal du beregne potensen <span class="math inline">\(2^4\)</span>, bruker du følgende syntax:</p>
 <pre><code>In [23]: 2**4
 Out[23]: 16</code></pre>
 <p>Dersom du ønsker å utføre heltallsdivisjon, bruker du to skråstreker. F.eks</p>
@@ -48,7 +63,7 @@ Out[26]: 5</code></pre>
 <pre><code>In [27]: 27 % 5
 Out[27]: 2</code></pre>
 <h2 id="kommentarer">Kommentarer</h2>
-<p>Vi kan kommentere koden vår. Vi kan gjøre dette ved å strive tekst til høyre for en hashtag <code>#</code>.</p>
+<p>For å gjøre koden lettere å lese for andre (og oss selv når vi tar den frem etter lang tid), bruker vi kommentarer inne i koden. Vi kan kommentere med å skrive tekst til høyre for en hashtag <code>#</code>.</p>
 <pre><code>In [44]: # Dette er en kommentar, og blir ignorert av python
 
 In [45]: smartvar = 5.0 + 3.4
@@ -68,26 +83,29 @@ b = 8
 
 c = a*b</code></pre>
 <h2 id="variable">Variable</h2>
-<p>Variabelen er navnet vi bruker på en adresse i minnet som holder et objekt.</p>
+<p>Du bør tenke på variabelen som en lagringsenhet for et objekt. Hvis du ikke vet hva begrepet objekt betyr i programmering, kan du trygt tenke et objekt det som en “ting”.</p>
 <p>I koden under lagres flyttallet <code>5.0</code> i variabelen <code>a</code>.</p>
 <pre><code>a = 5.0</code></pre>
-<p>Variabelen <code>a</code> ligger fysisk lagret i minnet på maskinen, og datamaskinen har en adresse til dette stedet. Alt vi behøver å tenke på, er at vi kan nå dette stedet ved å referere til <code>a</code>.</p>
-<p>Vi kan bruke variable til å gjøre matematiske formler mer leselig:</p>
-<pre><code>In [11]: a = -9.81
+<p>Python har tilgang til adressen i minnet på maskinen der tallet <code>5.0</code> ligger lagret. Alt vi behøver å tenke på, er at vi kan nå dette stedet og informasjonen den inneholder ved å referere til variabelen <code>a</code>.</p>
+<h3 id="bruk-av-variable-i-matematiske-formler">Bruk av variable i matematiske formler</h3>
+<p>Vi kan bruke variable til å gjøre matematiske formler mer leselig. Vi ønsker å beregne høyden <span class="math inline">\(h\)</span> over bakken / utgangsposisjonen ved et lodrett kast, gitt ved formelen <span class="math display">\[h(t) = v_0t + \frac{1}{2}gt^2,\]</span> der <span class="math inline">\(v_0\)</span> er utgangshastigheten i meter/sekund, <span class="math inline">\(g=-9.81\text{m}/\text{s}^2\)</span> er gravitasjonen, og <span class="math inline">\(t\)</span> er tiden målt i sekunder.</p>
+<pre><code>In [1]: g = -9.81   # gravitasjonskonstant
 
-In [12]: a = -9.81 # gravitasjonskonstant
+In [2]: t = 1.3
 
-In [13]: t = 0.5
+In [3]: v0 = 15     # utgangshastighet
 
-In [14]: v0 = 15   # utgangshastighet
+In [4]: h = v0*t + 0.5*g*t**2
 
-In [15]: s = v0*t + 0.5*a*t**2
-
-In [16]: s
-Out[16]: 6.27375</code></pre>
+In [5]: h
+Out[5]: 11.21055</code></pre>
+<p>Legg merke til forskjellen i lesbarhet sammenliknet med å hardkode dette:</p>
+<pre><code># blir du litt svimmel av dette? 
+In [10]: 15*1.3 + 0.5*(-9.81)*1.3**2
+Out[10]: 11.21055</code></pre>
 <h2 id="objekter">Objekter</h2>
-<p>Alt i python er objekter. Du kan derfor tenke på alle variable som en ting eller enhet som har tilhørende metoder for å vise informasjon om dataene objektet inneholder.</p>
-<p>I ipython kan du gjøre dette f.eks med følgende kode</p>
+<p>Alt i python er objekter. Du kan derfor tenke på alt i python som en ting eller enhet som har tilhørende metoder for å forandre eller vise informasjon om dataene objektet inneholder.</p>
+<p>I ipython kan du gjøre dette med f.eks følgende kode</p>
 <pre><code>In [32]: a = 5.0
 
 In [33]: a.</code></pre>
@@ -97,22 +115,22 @@ In [33]: a.</code></pre>
 
 In [38]: b.upper()
 Out[38]: &#39;TEKST&#39;</code></pre>
-<p>Såkalt objektorientert programmering dreier seg om å definere egne objekter med tilhørende metoder. Dette er neppe aktuelt i VGS med det første.</p>
-<h2 id="samling-av-datatyper">Samling av datatyper</h2>
-<p>Python tilbyr flere måter å samle og strukturere data på. Blant disse er listen den enkleste å bruke. Koden under illustrerer hvordan en liste kan lages, og hvordan du kan hente ut informasjon fra listen.</p>
-<pre><code>stringlist = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]
+<p>Såkalt objektorientert programmering dreier seg om å definere egne objekter med tilhørende metoder. Dette er neppe aktuelt i VGS på mange år.</p>
+<h2 id="gruppering-og-indeksering-av-data">Gruppering og indeksering av data</h2>
+<p>Python tilbyr flere måter å samle og strukturere data på. Blant disse er listen den enkleste å bruke. Koden under illustrerer hvordan en liste kan lages, og hvordan du kan hente ut informasjon fra listen. Merk at elementene i listen nummereres fra <span class="math inline">\(0\)</span>.</p>
+<pre><code>In [18]: # lag en liste
 
-stringlist[0]
-Out[6]: &#39;a&#39;
+In [19]: stringlist = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]
 
-stringlist[5]
-Out[7]: &#39;f&#39;
+In [20]: stringlist[0]          # hent ut første element, med indeks 0
+Out[20]: &#39;a&#39;
 
-stringlist[-1]
-Out[8]: &#39;f&#39;
+In [21]: stringlist[5]          # hent ut sjette element, med indeks 5
+Out[21]: &#39;f&#39;
 
-stringlist[1:5]
-Out[9]: [&#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]</code></pre>
+In [22]: stringlist[1:5]        # hent ut en del av listen
+Out[22]: [&#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]</code></pre>
+<p>Den siste kommandoen <code>stringlist[1:5]</code> gir oss en liste med elementene i indeksene 1, 2, 3, og 4 fra <code>stringlist</code>. Kommandoen er altså inklusiv fra start, og ekslusiv til slutt.</p>
 <p>Lister kan inneholder objekter av ulike typer:</p>
 <pre><code>In [39]: mixedlist = [&#39;a&#39;, 5, 5.2, &#39;b&#39;, &#39;c&#39;]
 

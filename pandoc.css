@@ -21,16 +21,16 @@ body {
 }
 
 a {
-  color: #0645ad;
+  color: #3366ff;
   text-decoration: none;
 }
 
 a:visited {
-  color: #0b0080;
+  color: #0000b3;
 }
 
 a:hover {
-  color: #06e;
+  color: #33adff;
 }
 
 a:active {

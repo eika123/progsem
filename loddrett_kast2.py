@@ -1,8 +1,8 @@
 N = 10
-g = -9.81   # m/s**2      (gravitasjonskonstant)
-v0 = 10     # m/s         (utgangshastighet)
-h0 = 1      # m           (utgangsposisjon
-            #             høyde over bakken)
+g = -9.81   # m/s**2   (gravitasjonskonstant)
+v0 = 10     # m/s      (utgangshastighet)
+h0 = 1      # m        (utgangsposisjon
+            #          høyde over bakken)
 
 # høyden over bakken beregnes for tider i
 # intervallet [t0, T]

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Oppgaver: Kom i gang med python</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="../pandoc.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script><script>document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body);
+  });</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Oppgaver: Kom i gang med python</h1>
+</header>
+<h2 id="de-fire-regneartene">De fire regneartene</h2>
+<h3 id="oppgave-1">Oppgave 1</h3>
+<ol type="a">
+<li>Hvordan tror du python vil beregne utrykkene i koden under? Regn ut for hånd/kalkulator og sjekk svaret ditt med <code>ipython</code>.</li>
+</ol>
+<ol type="i">
+<li><p><code>(5 - 2)/(20 - 14)</code></p></li>
+<li><p><code>-(6 - 2)/(36 - 45)*5</code></p></li>
+<li><p><code>(5 - 3)/(20 - 18)**2*5</code></p></li>
+</ol>
+<ol start="2" type="a">
+<li>Evaluer utrykkene under med <code>ipython</code>.</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbf{i)} &amp; &amp; &amp; &amp; &amp; &amp; \frac{8 - 2}{-22 + 28}\cdot 85 \\ \\ \\
+\mathbf{ii)} &amp; &amp; &amp; &amp; &amp; &amp; \displaystyle \left(\frac{8 - 2}{-22 + 28}\right)^3\cdot 5
+\end{aligned}
+\]</span></p>
+<h2 id="bruk-av-variabler-i-formler-og-matematiske-utrykk">Bruk av variabler i formler og matematiske utrykk</h2>
+<h3 id="oppgave-2">Oppgave 2</h3>
+<p>En bil akselerer med konstant akselerasjon <span class="math inline">\(a = 8\)</span> m/s fra startstreken med <span class="math inline">\(v_0 = 0\)</span> på en rettlinjet drag-bane. Den tilbakelagte avstanden <span class="math inline">\(s\)</span>, målt i meter, etter tiden <span class="math inline">\(t\)</span> målt i sekunder er gitt ved formelen</p>
+<p><span class="math display">\[
+s = \frac{1}{2}at^2
+\]</span></p>
+<ol type="a">
+<li><p>Bruk ipython til å beregne den tilbakelaget avstanden etter 15 sekunder.</p></li>
+<li><p>Snu formelen for <span class="math inline">\(t\)</span>, og bestem hvor mange sekunder bilen bruker på å kjøre 100 meter.</p></li>
+</ol>
+<h3 id="oppgave-3">Oppgave 3</h3>
+<p>Kåre skal kjøre forbi en bil på motorveien. Han starter fra en hastighet på <span class="math inline">\(v_0 = 80\text{ km/t}\)</span>. Gjennom hele forbikjøringen akselerer han med en konstant askelerasjon <span class="math inline">\(a = 4\text{ m/s}\)</span> til han når en hastighet på <span class="math inline">\(v = 100 \text{ km/t}\)</span>.</p>
+<p>Formelen <span class="math display">\[ 2as = v^2 - v_0^2\]</span> gir sammenhengen mellom den tilbakelaget strekningen <span class="math inline">\(s\)</span>, akselerasjonen <span class="math inline">\(a\)</span>, starthastigheten <span class="math inline">\(v_0\)</span> og slutthastigheten <span class="math inline">\(v\)</span>.</p>
+<ol type="a">
+<li><p>Snu formelen over, og lag en formel for <span class="math inline">\(s\)</span>.</p></li>
+<li><p>Bruk ipython til å beregne hvor mange meter Kåre brukte på forbikjøringen.</p></li>
+</ol>
+<h3 id="oppgave-4">Oppgave 4</h3>
+<p>Hookes lov gir oss sammenhengen mellom kraften fra en fjær og forlengelsen i fjæra.</p>
+<p>Dersom vi strekker ut en fjær fra <em>hvilelengden</em> <span class="math inline">\(L_0\)</span> til lengden <span class="math inline">\(L = L_0 + x\)</span>, er motkraften fra fjæra gitt ved Hookes lov: <span class="math display">\[ F = -kx, \]</span> der <em>fjærkonstanten</em> <span class="math inline">\(k\)</span> er et fast tall, som avhenger av fjærens utforming og materialene som er brukt i fjæra. Merk at det negative fortegnet sørger for at kraften virker i motsatt retning av forlengelsen <span class="math inline">\(x\)</span>.</p>
+<ol type="a">
+<li>En fjær har fjærkonstant <span class="math inline">\(k = 15 \text{kN/m}\)</span>. Fjæra blir forlenget med <span class="math inline">\(0,8 \text{ cm}\)</span>. Bruk ipython og bestem kraften fra fjæra.</li>
+</ol>
+<h3 id="oppgave-5">Oppgave 5</h3>
+<p>Formelen for kroppsmasseindeks <span class="math inline">\(I\)</span> er gitt ved <span class="math display">\[
+I = \frac{m}{h^2} ,
+\]</span> der <span class="math inline">\(h\)</span> er personens høyde, målt i meter, og <span class="math inline">\(m\)</span> er personens masse, målt i kg.</p>
+<ol type="a">
+<li><p>Bruk ipython til å beregne kroppsmasseindeksen for en person som veier 75 kg og er 178 cm høy.</p></li>
+<li><p>Bruk ipython til å beregne din egen kroppsmasseindeks.</p></li>
+<li><p>Snu formelen for massen <span class="math inline">\(m\)</span>. Beregn massen for en person som har en BMI på 24 og er 180 cm høy.</p></li>
+<li><p>Snu formelen for høyden <span class="math inline">\(h\)</span>. Beregn høyden for en person som har en BMI på 26 og veier 76kg. HINT: du kan bruke syntaxen <code>a**0.5</code> for å ta kvadratroten av et tall <code>a</code>.</p></li>
+</ol>
+<h3 id="oppgave-6">Oppgave 6</h3>
+<p>Et objekt som beveger seg i en sirkulær bevegelse om et punkt <span class="math inline">\(P\)</span> opplever en sentripetalakselerasjon med retning fra objektet mot <span class="math inline">\(P\)</span>. Sentripetalakselerasjonens størrelse (absoluttverdi) <span class="math inline">\(a\)</span> er gitt ved</p>
+<p><span class="math display">\[ a = \frac{v^2}{r} ,\]</span></p>
+<p>der <span class="math inline">\(r\)</span> er avstanden fra objektet til punktet <span class="math inline">\(P\)</span>, og <span class="math inline">\(v\)</span> er objektets fart målt i meter per sekund.</p>
+<p>Bruk <code>ipyton</code> til å beregne akselerasjonen for et objekt i sirkulær bevegelse med fart <span class="math inline">\(12 \text{ m/s}\)</span> og radius på <span class="math inline">\(7 \text{ m}\)</span>.</p>
+<h3 id="oppgave-7">Oppgave 7</h3>
+<p>Dette er en fortsettelse av oppgave 3.</p>
+<p>Newtons andre lov sier at summen av kreftene på et objekt er lik produktet av objektets masse og akselerasjon:</p>
+<p><span class="math display">\[\Sigma F = ma\]</span></p>
+<p>En bil kjører i en sving med radius på 125m med en fart på 80 km/h. Bilen veier 1500kg.</p>
+<ol type="a">
+<li><p>Tegn frilegemediagram.</p></li>
+<li><p>Hvor stor er sentripetalkraften på bilen?</p></li>
+<li><p>Hvor mange <span class="math inline">\(g\)</span>-krefter tilsvarer denne sentripetalkraften?</p></li>
+</ol>
+<p>En sving har radius på 80 m. En bil veier 1427 kg.</p>
+<ol start="4" type="a">
+<li>Hvor stor fart kan bilen holde i svingen dersom sentripetalkraften skal holde seg under <span class="math inline">\(3500\)</span> Newton ?</li>
+</ol>
+<h3 id="oppgave-8">Oppgave 8</h3>
+<p>I en karusell beveger menneskene seg i en sirkel slik at de blir ‘’limt’’ til veggen. Karusellen har en radius på <span class="math inline">\(R = 5\text{ m}\)</span> og bruker 4,2 sekunder på én omdreining. Kåre veier 60 kg og tar en slik karusell.</p>
+<ol type="a">
+<li><p>Tegn frilegemediagram</p></li>
+<li><p>Hvor stor er sentripetalakselerasjonen <span class="math inline">\(a\)</span>?</p></li>
+<li><p>Bruk newtons andre lov, <span class="math inline">\(\Sigma F = ma\)</span> til å bestemme summen av kreftene som virker på Kåre når han limes til veggen og følger en sirkulær bevegelse.</p></li>
+</ol>
+<h2 id="bruk-av-lister">Bruk av lister</h2>
+</body>
+</html>

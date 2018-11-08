@@ -275,3 +275,7 @@ Metoden tilføyer altså et element på slutten av listen.
 Andre måter å indeksere data på i python er *numpy-arrays* og *dictionaries*.
 
 
+
+
+### Oppgaver
+[Du finner oppgaver her](exercises_getstarted.html)

@@ -11,4 +11,6 @@ for i in range(2, N):
     print(a)
     a_pp = a_p
     a_p = a
-    
+
+
+

@@ -111,3 +111,8 @@ c) Bruk newtons andre lov, $\Sigma F = ma$ til å bestemme summen av kreftene so
 
 
 ## Bruk av lister
+
+
+
+
+[Tilbake til teori](./get_started.html)

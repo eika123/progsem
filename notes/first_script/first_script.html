@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="../css/pandoc.css">
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="ditt-første-script">Ditt første script</h1>
+<p>Vi ser kort på følgende script.</p>
+<pre><code>print(&#39;Hello, World!&#39;)</code></pre>
+<p>Du kan selv lagre teksten under i en fil <code>hello_world.py</code>, og kjøre den i spyder ved å trykke på &quot;play&quot;-knappen, eller kommandoen <code>python hello_world.py</code> i en terminal.</p>
+<p>Under ser du en kjøring fra en <code>cmder</code>-terminal.</p>
+<pre><code>λ python hello_world.py
+Hello, World!</code></pre>
+<h4 id="oppgave-1">Oppgave 1:</h4>
+<p>Kjør programmet <code>hello_world.py</code> på din egen datamaskin.</p>
+<p>filnavn: <code>hello_world.py</code></p>
+<h3 id="kort-dissekering-av-programmet-hello_world.py">Kort dissekering av programmet <code>hello_world.py</code></h3>
+<p>Strengen <code>Hello, World!</code> blir gitt som input til funksjonen <code>print</code>. Funksjonen <code>print</code> skriver så ut teksten <code>Hello, World!</code> til standard-output. Standard-output (<code>stdout</code>) kan være terminalen, eller ipython-vinduet ditt i Spyder.</p>
+<p>Du skal senere lære mer om funksjoner. Akkurat nå kan du tenke på <code>print</code> som en måte å skrive ut verdien av variable og annet programmet ditt har beregnet.</p>
+<h1 id="variable">Variable</h1>
+<p>Vi kan lage scriptet mer dynamisk ved å bruke variable.</p>
+<pre><code>fornavn = &#39;Kato&#39;
+etternavn = &#39;Pedersen&#39;
+
+print(&#39;Hello &#39; + fornavn + &#39; &#39; + etternavn + &#39;!&#39;)</code></pre>
+<p>Vi kjører scriptet:</p>
+<pre><code>λ python hello_kato.py
+Hello, Kato Pedersen!</code></pre>
+<p>Du finner scriptet i filen <code>hello_kato.py</code>.</p>
+<h4 id="oppgave-2">Oppgave 2</h4>
+<p>Bytt verdien til variablene <code>fornavn</code> og <code>etternavn</code> til strenger for henholdsvis ditt eget fornavn og etternavn.</p>
+<p>filnavn <code>hallo_navn.py</code></p>
+<h5 id="valg-av-variabelnavn.">Valg av variabelnavn.</h5>
+<p>Merk at vi har valgt å bruke hele ord som variabelnavn. Det kan være fristende å la <code>f</code> være variablen for fornavn og <code>e</code> variabelen for etternavn. Vi får da følgende kode:</p>
+<pre><code>f = &#39;Kato&#39;
+e = &#39;Pedersen&#39;
+
+print(&#39;Hello &#39; + f + &#39; &#39; + e + &#39;!&#39;)</code></pre>
+<p>Problemet med denne koden er at det ikke er like tydelig hva variablene <code>f</code> og <code>e</code> inneholder, selv om det i dette eksempelet fortsatt er ganske oversiktlig. Legg til deg en god vane og velg variabelnavn som er</p>
+<ul>
+<li>beskrivende og mest mulig fullstendige</li>
+<li>ikke for lange</li>
+</ul>
+<p>Dersom variablene brukes i matematiske beregninger bør du sørge for å velge navnet slik at koden blir mest mulig lik matematikken. Da er det lettere å finne feil når du sammenlikner skisser og beregninger for hånd med koden du eller andre har skrevet.</p>
+<h3 id="repetisjon-bruk-av-variable-til-å-gjøre-matematiske-beregninger">Repetisjon: Bruk av variable til å gjøre matematiske beregninger</h3>
+<h4 id="varmestråling-med-stefan-boltzmanns-lov">Varmestråling med Stefan-Boltzmanns lov</h4>
+<p>Hvor mye varme stråler det ut fra en ovn som holder 300 grader celcius? Dette tilsvarer 593.15 K (grader Kelvin).</p>
+<p>Varmestrålingen <span class="math inline">\(\Phi\)</span> fra et såkalt sort legeme med absolutt temperatur <span class="math inline">\(T\)</span>, målt i Kelvin, er gitt ved <span class="math display">\[ \Phi = \sigma T^4,\]</span> hvor <span class="math inline">\(\sigma\)</span> er Stefan-Boltzmanns konstant, gitt ved</p>
+<p><span class="math display">\[\sigma = \frac{2\pi^5k_B^4}{15c^2h^3} = 5.670400\cdot 10^{-8} \text{Wm}^{-2}\text{K}^{-4}.\]</span></p>
+<p>Vi kan nå regne ut varmefluksen (varmestråling per kvadratmeter) med <code>python</code>.</p>
+<pre><code>sigma = 5.6704E-8
+o = sigma
+T = 593.15
+
+phi = o*T**4
+
+print(&quot;Energifluks :&quot;, phi, &quot; Watt/kvadratmeter&quot;)</code></pre>
+<p>Vi kjører scriptet:</p>
+<pre><code>λ python stephan_boltzmann.py
+Energifluks : 7018.944927276633  Watt/kvadratmeter</code></pre>
+<p>Et sort legeme kan ofte brukes med god tilnærming for objekter som absorberer stråling godt. For støpejern er strålingen ofte 70% - 90% av strålingen beregnet med Stephan - Boltzmanns lov.</p>
+<p>Vi kan skrive fluksen for støpejern, <span class="math inline">\(\Phi_{s}\)</span> som f.eks</p>
+<p><span class="math display">\[ \Phi_{s} = 0.8\sigma T^4.\]</span></p>
+<p>Generelt kan vi skrive <span class="math display">\[ \Phi_{s} = \epsilon\cdot\sigma T^4,\]</span> der <span class="math inline">\(\epsilon\)</span> er emissiviteten til materialet. Den er ofte en funksjon av temperaturen.</p>
+<h4 id="oppgave">Oppgave</h4>
+<p>Du fyrer i en støpejernsovn slik at overflatetemperaturen blir 250 grader celsius. Ovnen har et overflateareal på <span class="math inline">\(1.9\text{m}^2\)</span>. Anta at emmisiviteten til støpejernet ved denne temperaturen er på <span class="math inline">\(\epsilon = 0.68\)</span>. Bruk Stephan-Boltzmanns lov og beregn strålingseffekten til denne ovnen. Gi svaret i kilowatt <span class="math inline">\((\text{kW})\)</span>.</p>
+<p>filnavn: <code>stefan_boltzmann_ovn.py</code>.</p>
+<h4 id="beregning-av-stoffmengde-i-kjemi">Beregning av stoffmengde i kjemi</h4>
+<p>Dersom du slipper ut 15 kg <span class="math inline">\(\text{CO}_2\)</span>, så har du sluppet ut 15000 gram. Hvor mange molekyler er dette?</p>
+<p>Fra kjemi har du kanskje lært om formelen <span class="math display">\[
+\begin{align}
+\text{stoffmengde (mol)} = \frac{\text{masse (g)}}{\text{molar masse (g/mol)}},
+&amp; &amp; &amp; &amp; &amp;
+n = \frac{m}{M_m}
+\end{align}
+\]</span></p>
+<p>Vi kjenner massen <span class="math inline">\(m=15000\text{g}\)</span>, og for <span class="math inline">\(\text{CO}_2\)</span> er den molare massen <span class="math inline">\(M_m = 44\text{g}/\text{mol}\)</span>. Vi regner ut antall mol og antall molekyler med <code>python</code></p>
+<pre><code>avogadro_konstant = 6.28E23   # avogadros tall
+M_oksygen = 16
+M_karbon = 12
+M = M_karbon + 2*M_oksygen    # molar masse (g/mol)
+m = 15000                     # masse (g)
+
+n = m/M                       # antall mol
+
+antall_molekyler = n*avogadro_konstant
+
+print(&quot;antall mol: &quot;, n)
+print(&quot;antall molekyler: &quot;, antall_molekyler)</code></pre>
+<p>Vi kjører scriptet:</p>
+<pre><code>λ python molekyltelling.py
+antall mol:  340.90909090909093
+antall molekyler:  2.140909090909091e+26</code></pre>
+<h4 id="beregning-av-konsentrasjon-i-kjemi">Beregning av konsentrasjon i kjemi</h4>
+<h2 id="løkker-lister-tupler-og-litt-om-dictionaries">Løkker, lister, tupler og litt om dictionaries</h2>
+<h2 id="gruppering-og-indeksering-av-data">Gruppering og indeksering av data</h2>
+<p>Python tilbyr flere måter å samle og strukturere data på. Blant disse er listen den enkleste å bruke. Listen er en svært fleksibel datastruktur, den kan inneholde hva som helst! Python tilbyr en enkel syntax for lister.</p>
+<p>Utklippet under fra en session i <code>ipython</code> viser hvordan en liste kan lages, og hvordan du kan hente ut informasjon fra listen. Merk at elementene i listen nummereres fra <span class="math inline">\(0\)</span>.</p>
+<pre><code>In [1]: # lag en liste
+
+In [2]: bokstaver = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]   
+
+In [3]: bokstaver[0]       # hent ut første element, med indeks 0
+Out[3]: &#39;a&#39;
+
+In [4]: bokstaver[5]       # hent ut sjette element, med indeks 5
+Out[4]: &#39;f&#39;
+
+In [5]: bokstaver[-1]      # hent ut siste element i listen
+Out[5]: &#39;f&#39;
+
+In [6]: bokstaver[-2]      # hent ut nest-siste element i listen
+Out[6]: &#39;e&#39;
+
+In [7]: len(bokstaver)     # hvor mange elementer er det i listen (tell!)?
+Out[7]: 6</code></pre>
+<h4 id="oppgave-3">Oppgave</h4>
+<p>Lag en liste navn som inneholder alle navnene dine (fornavn, etternavn og mellomnavn). Print ut listen med kommandoen <code>print(navn)</code>.</p>
+<p>filnavn: <code>list_navn.py</code></p>
+<h3 id="slicing">Slicing</h3>
+<p>Vi kan lage en &quot;underliste&quot; av listen <code>bokstaver</code></p>
+<pre><code>In [8]: # lag en liste som inneholder en del av den opprinnelige listen
+
+In [9]: bokstaver[1:5]
+Out[9]: [&#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]</code></pre>
+<p>Ved kommandoen <code>bokstaver[1:5]</code> får vi altså 1. element, 2. element, 3.element og 4.element av listen <code>bokstaver</code>.</p>
+<p>Den siste kommandoen <code>bokstaver[1:5]</code> gir oss en liste med elementene i indeksene 1, 2, 3, og 4 fra <code>bokstaver</code>. Kommandoen er altså inklusiv fra start, og ekslusiv til slutt.</p>
+<h3 id="lister-kan-inneholde-ulike-typer-data">Lister kan inneholde ulike typer data</h3>
+<p>Lister kan inneholder objekter av ulike typer:</p>
+<pre><code>In [1]: mixedlist = [&#39;a&#39;, 5, 5.2, &#39;b&#39;, &#39;c&#39;]
+
+In [2]: mixedlist[3]
+Out[2]: &#39;b&#39;
+
+In [3]: mixedlist[4]
+Out[3]: &#39;c&#39;</code></pre>
+<h4 id="lister-kan-inneholde-lister">Lister kan inneholde lister</h4>
+<p>En liste som inneholder lister med <code>[fornavn, etternavn, alder]</code>.</p>
+<pre><code>elever = [[&#39;Adrian&#39;, &#39;Hansen&#39;, 16], [&#39;Kim&#39;, &#39;Pedersen&#39;, 17],\
+[&#39;Stine&#39;,&#39;Johansen&#39;, 16], [&#39;Mona&#39;, &#39;Jensen&#39;, 17]]</code></pre>
+<p>Merk at vi bruker en back-slash for å fortelle python at samme linjen kode fortsetter på neste linje.</p>
+<h3 id="metoder-for-lister">Metoder for lister</h3>
+<p>Siden en liste også er et objekt, kommer den med et sett innebygde metoder. En svært nyttig metode er <code>append</code></p>
+<pre><code>In [1]: somelist = [0.1, 0.2, 0.3, 0.4]
+
+In [2]: somelist.append(0.5)
+
+In [3]: somelist
+Out[3]: [0.1, 0.2, 0.3, 0.4, 0.5]</code></pre>
+<p>Metoden tilføyer altså et element på slutten av listen.</p>
+<p>En annen nyttig metode er <code>pop</code>.</p>
+<pre><code>In [4]: somelist.pop()
+Out[4]: 0.5
+
+In [5]: somelist
+Out[5]: [0.1, 0.2, 0.3, 0.4]</code></pre>
+<p>Metoden <code>pop</code> returnerer (&quot;gir ut&quot;) den siste verdien i lista, men fjerner også denne verdien fra listen. Dette er svært nyttig dersom man bruker listen til å modellere for eksempel en kø, eller må sette ulike operasjoner datamaskinen skal gjøre i en kø.</p>
+<p>Du får opp metodene for en liste ved å lage en liste, f.eks <code>somelist</code> som over i python, og skrive <code>dir(somelist)</code>. Du trenger ikke tenke på metodene med dobbel understrek rundt på dette tidspunktet, kun de siste metodene <code>append, clear, copy, count, extend, index, insert, pop, remove, reverse</code> og <code>sort</code>. I tillegg får du lengden av listen (antall elementer) når du skriver <code>len(somelist)</code>.</p>
+<h3 id="løkker-while-løkken">Løkker: while-løkken</h3>
+<pre><code>while (condition):
+    #do something interesting
+    ...</code></pre>
+<h3 id="litteratur-og-tutorials">Litteratur og tutorials</h3>
+<h5 id="deep-copy-og-shallow-copy">Deep copy og shallow copy</h5>
+<p>Se på følgende kode:</p>
+<pre><code>x = 5      # variabelen x får verdien 5
+y = x      # variabelen y får samme verdi som x
+y = 10
+print(x)</code></pre>
+<p>Skriver programmet ut verdien til <code>x</code> - altså 5, eller skriver den ut 10? Uansett utfall - dette behøver en grundig forklaring! <a href="https://www.python-course.eu/python3_deep_copy.php">Tutorial - deep copy og shallow copy av lister</a></p>
+</body>
+</html>

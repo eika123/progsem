@@ -4,6 +4,7 @@ Vi ser kort på følgende script.
 ```
 print('Hello, World!')
 ```
+
 Du kan selv lagre teksten
 under i en fil `hello_world.py`, og kjøre den i spyder
 ved å trykke på "play"-knappen, eller kommandoen
@@ -19,6 +20,7 @@ Hello, World!
 Kjør programmet `hello_world.py` på din egen datamaskin.
 
 filnavn: `hello_world.py`
+
 
 ### Kort dissekering av programmet `hello_world.py`
 Strengen `Hello, World!` blir gitt som input til funksjonen
@@ -295,12 +297,42 @@ I tillegg får du lengden av listen (antall elementer) når du skriver
 
 
 ### Løkker: while-løkken
+Frem til nå har python i beste fall vært en avansert kalkulator, som i tillegg kan telle som en helt og beregne lengden på ord og korte tekster.
+Problemet er at vi må gjøre svært mange instruksjoner selv, og gjenta
+nesten identiske instruksjoner.
+Hvis programmering er kjedelig, og man gjentar seg selv, finnes det garantert
+en bedre måte å gjøre det på!
+
+For å virkelig få fart på sakene, og slippe å gjenta oss selv, bruker vi
+løkker. Python kommer med to typer løkker: `for` - løkken og `while`-løkken.
+
+Vi begynner med sistnevnte.
 ```
 while (condition):
     #do something interesting
     ...
 ```
 
+
+
+
+### For-løkker
+
+
+
+### Lister og strenger
+```
+navn = "Jens Ove Karlsen Kristiansen"
+
+navn_liste = navn.split()
+```
+
+Argumenter til `.split`-metoden.
+
+`.strip`-metoden.
+
+
+`.join`-metoden.
 
 ### Litteratur og tutorials
 

@@ -1,0 +1,442 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\date{}
+
+\begin{document}
+
+\section{Ditt første script}\label{ditt-fuxf8rste-script}
+
+Vi ser kort på følgende script.
+
+\begin{verbatim}
+print('Hello, World!')
+\end{verbatim}
+
+Du kan selv lagre teksten under i en fil \texttt{hello\_world.py}, og
+kjøre den i spyder ved å trykke på ``play''-knappen, eller kommandoen
+\texttt{python\ hello\_world.py} i en terminal.
+
+Under ser du en kjøring fra en \texttt{cmder}-terminal.
+
+\begin{verbatim}
+λ python hello_world.py
+Hello, World!
+\end{verbatim}
+
+\paragraph{Oppgave 1:}\label{oppgave-1}
+
+Kjør programmet \texttt{hello\_world.py} på din egen datamaskin.
+
+filnavn: \texttt{hello\_world.py}
+
+\subsubsection{\texorpdfstring{Kort dissekering av programmet
+\texttt{hello\_world.py}}{Kort dissekering av programmet hello\_world.py}}\label{kort-dissekering-av-programmet-hello_world.py}
+
+Strengen \texttt{Hello,\ World!} blir gitt som input til funksjonen
+\texttt{print}. Funksjonen \texttt{print} skriver så ut teksten
+\texttt{Hello,\ World!} til standard-output. Standard-output
+(\texttt{stdout}) kan være terminalen, eller ipython-vinduet ditt i
+Spyder.
+
+Du skal senere lære mer om funksjoner. Akkurat nå kan du tenke på
+\texttt{print} som en måte å skrive ut verdien av variable og annet
+programmet ditt har beregnet.
+
+\section{Variable}\label{variable}
+
+Vi kan lage scriptet mer dynamisk ved å bruke variable.
+
+\begin{verbatim}
+fornavn = 'Kato'
+etternavn = 'Pedersen'
+
+print('Hello ' + fornavn + ' ' + etternavn + '!')
+\end{verbatim}
+
+Vi kjører scriptet:
+
+\begin{verbatim}
+λ python hello_kato.py
+Hello, Kato Pedersen!
+\end{verbatim}
+
+Du finner scriptet i filen \texttt{hello\_kato.py}.
+
+\paragraph{Oppgave 2}\label{oppgave-2}
+
+Bytt verdien til variablene \texttt{fornavn} og \texttt{etternavn} til
+strenger for henholdsvis ditt eget fornavn og etternavn.
+
+filnavn \texttt{hallo\_navn.py}
+
+\subparagraph{Valg av variabelnavn.}\label{valg-av-variabelnavn.}
+
+Merk at vi har valgt å bruke hele ord som variabelnavn. Det kan være
+fristende å la \texttt{f} være variablen for fornavn og \texttt{e}
+variabelen for etternavn. Vi får da følgende kode:
+
+\begin{verbatim}
+f = 'Kato'
+e = 'Pedersen'
+
+print('Hello ' + f + ' ' + e + '!')
+\end{verbatim}
+
+Problemet med denne koden er at det ikke er like tydelig hva variablene
+\texttt{f} og \texttt{e} inneholder, selv om det i dette eksempelet
+fortsatt er ganske oversiktlig. Legg til deg en god vane og velg
+variabelnavn som er
+
+\begin{itemize}
+\tightlist
+\item
+  beskrivende og mest mulig fullstendige
+\item
+  ikke for lange
+\end{itemize}
+
+Dersom variablene brukes i matematiske beregninger bør du sørge for å
+velge navnet slik at koden blir mest mulig lik matematikken. Da er det
+lettere å finne feil når du sammenlikner skisser og beregninger for hånd
+med koden du eller andre har skrevet.
+
+\subsubsection{Repetisjon: Bruk av variable til å gjøre matematiske
+beregninger}\label{repetisjon-bruk-av-variable-til-uxe5-gjuxf8re-matematiske-beregninger}
+
+\paragraph{Varmestråling med Stefan-Boltzmanns
+lov}\label{varmestruxe5ling-med-stefan-boltzmanns-lov}
+
+Hvor mye varme stråler det ut fra en ovn som holder 300 grader celcius?
+Dette tilsvarer 593.15 K (grader Kelvin).
+
+Varmestrålingen \(\Phi\) fra et såkalt sort legeme med absolutt
+temperatur \(T\), målt i Kelvin, er gitt ved \[ \Phi = \sigma T^4,\]
+hvor \(\sigma\) er Stefan-Boltzmanns konstant, gitt ved
+
+\[\sigma = \frac{2\pi^5k_B^4}{15c^2h^3} = 5.670400\cdot 10^{-8} \text{Wm}^{-2}\text{K}^{-4}.\]
+
+Vi kan nå regne ut varmefluksen (varmestråling per kvadratmeter) med
+\texttt{python}.
+
+\begin{verbatim}
+sigma = 5.6704E-8
+o = sigma
+T = 593.15
+
+phi = o*T**4
+
+print("Energifluks :", phi, " Watt/kvadratmeter")
+\end{verbatim}
+
+Vi kjører scriptet:
+
+\begin{verbatim}
+λ python stephan_boltzmann.py
+Energifluks : 7018.944927276633  Watt/kvadratmeter
+\end{verbatim}
+
+Et sort legeme kan ofte brukes med god tilnærming for objekter som
+absorberer stråling godt. For støpejern er strålingen ofte 70\% - 90\%
+av strålingen beregnet med Stephan - Boltzmanns lov.
+
+Vi kan skrive fluksen for støpejern, \(\Phi_{s}\) som f.eks
+
+\[ \Phi_{s} = 0.8\sigma T^4.\]
+
+Generelt kan vi skrive \[ \Phi_{s} = \epsilon\cdot\sigma T^4,\] der
+\(\epsilon\) er emissiviteten til materialet. Den er ofte en funksjon av
+temperaturen.
+
+\paragraph{Oppgave}\label{oppgave}
+
+Du fyrer i en støpejernsovn slik at overflatetemperaturen blir 250
+grader celsius. Ovnen har et overflateareal på \(1.9\text{m}^2\). Anta
+at emmisiviteten til støpejernet ved denne temperaturen er på
+\(\epsilon = 0.68\). Bruk Stephan-Boltzmanns lov og beregn
+strålingseffekten til denne ovnen. Gi svaret i kilowatt \((\text{kW})\).
+
+filnavn: \texttt{stefan\_boltzmann\_ovn.py}.
+
+\paragraph{Beregning av stoffmengde i
+kjemi}\label{beregning-av-stoffmengde-i-kjemi}
+
+Dersom du slipper ut 15 kg \(\text{CO}_2\), så har du sluppet ut 15000
+gram. Hvor mange molekyler er dette?
+
+Fra kjemi har du kanskje lært om formelen \[
+\begin{align}
+\text{stoffmengde (mol)} = \frac{\text{masse (g)}}{\text{molar masse (g/mol)}},
+& & & & &
+n = \frac{m}{M_m}
+\end{align}
+\]
+
+Vi kjenner massen \(m=15000\text{g}\), og for \(\text{CO}_2\) er den
+molare massen \(M_m = 44\text{g}/\text{mol}\). Vi regner ut antall mol
+og antall molekyler med \texttt{python}
+
+\begin{verbatim}
+avogadro_konstant = 6.28E23   # avogadros tall
+M_oksygen = 16
+M_karbon = 12
+M = M_karbon + 2*M_oksygen    # molar masse (g/mol)
+m = 15000                     # masse (g)
+
+n = m/M                       # antall mol
+
+antall_molekyler = n*avogadro_konstant
+
+print("antall mol: ", n)
+print("antall molekyler: ", antall_molekyler)
+\end{verbatim}
+
+Vi kjører scriptet:
+
+\begin{verbatim}
+λ python molekyltelling.py
+antall mol:  340.90909090909093
+antall molekyler:  2.140909090909091e+26
+\end{verbatim}
+
+\paragraph{Beregning av konsentrasjon i
+kjemi}\label{beregning-av-konsentrasjon-i-kjemi}
+
+\subsection{Løkker, lister, tupler og litt om
+dictionaries}\label{luxf8kker-lister-tupler-og-litt-om-dictionaries}
+
+\subsection{Gruppering og indeksering av
+data}\label{gruppering-og-indeksering-av-data}
+
+Python tilbyr flere måter å samle og strukturere data på. Blant disse er
+listen den enkleste å bruke. Listen er en svært fleksibel datastruktur,
+den kan inneholde hva som helst! Python tilbyr en enkel syntax for
+lister.
+
+Utklippet under fra en session i \texttt{ipython} viser hvordan en liste
+kan lages, og hvordan du kan hente ut informasjon fra listen. Merk at
+elementene i listen nummereres fra \(0\).
+
+\begin{verbatim}
+In [1]: # lag en liste
+
+In [2]: bokstaver = ['a', 'b', 'c', 'd', 'e', 'f']   
+
+In [3]: bokstaver[0]       # hent ut første element, med indeks 0
+Out[3]: 'a'
+
+In [4]: bokstaver[5]       # hent ut sjette element, med indeks 5
+Out[4]: 'f'
+
+In [5]: bokstaver[-1]      # hent ut siste element i listen
+Out[5]: 'f'
+
+In [6]: bokstaver[-2]      # hent ut nest-siste element i listen
+Out[6]: 'e'
+
+In [7]: len(bokstaver)     # hvor mange elementer er det i listen (tell!)?
+Out[7]: 6
+\end{verbatim}
+
+\paragraph{Oppgave}\label{oppgave-3}
+
+Lag en liste navn som inneholder alle navnene dine (fornavn, etternavn
+og mellomnavn). Print ut listen med kommandoen \texttt{print(navn)}.
+
+filnavn: \texttt{list\_navn.py}
+
+\subsubsection{Slicing}\label{slicing}
+
+Vi kan lage en ``underliste'' av listen \texttt{bokstaver}
+
+\begin{verbatim}
+In [8]: # lag en liste som inneholder en del av den opprinnelige listen
+
+In [9]: bokstaver[1:5]
+Out[9]: ['b', 'c', 'd', 'e']
+\end{verbatim}
+
+Ved kommandoen \texttt{bokstaver{[}1:5{]}} får vi altså 1. element, 2.
+element, 3.element og 4.element av listen \texttt{bokstaver}.
+
+Den siste kommandoen \texttt{bokstaver{[}1:5{]}} gir oss en liste med
+elementene i indeksene 1, 2, 3, og 4 fra \texttt{bokstaver}. Kommandoen
+er altså inklusiv fra start, og ekslusiv til slutt.
+
+\subsubsection{Lister kan inneholde ulike typer
+data}\label{lister-kan-inneholde-ulike-typer-data}
+
+Lister kan inneholder objekter av ulike typer:
+
+\begin{verbatim}
+In [1]: mixedlist = ['a', 5, 5.2, 'b', 'c']
+
+In [2]: mixedlist[3]
+Out[2]: 'b'
+
+In [3]: mixedlist[4]
+Out[3]: 'c'
+\end{verbatim}
+
+\paragraph{Lister kan inneholde
+lister}\label{lister-kan-inneholde-lister}
+
+En liste som inneholder lister med
+\texttt{{[}fornavn,\ etternavn,\ alder{]}}.
+
+\begin{verbatim}
+elever = [['Adrian', 'Hansen', 16], ['Kim', 'Pedersen', 17],\
+['Stine','Johansen', 16], ['Mona', 'Jensen', 17]]
+\end{verbatim}
+
+Merk at vi bruker en back-slash for å fortelle python at samme linjen
+kode fortsetter på neste linje.
+
+\subsubsection{Metoder for lister}\label{metoder-for-lister}
+
+Siden en liste også er et objekt, kommer den med et sett innebygde
+metoder. En svært nyttig metode er \texttt{append}
+
+\begin{verbatim}
+In [1]: somelist = [0.1, 0.2, 0.3, 0.4]
+
+In [2]: somelist.append(0.5)
+
+In [3]: somelist
+Out[3]: [0.1, 0.2, 0.3, 0.4, 0.5]
+\end{verbatim}
+
+Metoden tilføyer altså et element på slutten av listen.
+
+En annen nyttig metode er \texttt{pop}.
+
+\begin{verbatim}
+In [4]: somelist.pop()
+Out[4]: 0.5
+
+In [5]: somelist
+Out[5]: [0.1, 0.2, 0.3, 0.4]
+\end{verbatim}
+
+Metoden \texttt{pop} returnerer (``gir ut'') den siste verdien i lista,
+men fjerner også denne verdien fra listen. Dette er svært nyttig dersom
+man bruker listen til å modellere for eksempel en kø, eller må sette
+ulike operasjoner datamaskinen skal gjøre i en kø.
+
+Du får opp metodene for en liste ved å lage en liste, f.eks
+\texttt{somelist} som over i python, og skrive \texttt{dir(somelist)}.
+Du trenger ikke tenke på metodene med dobbel understrek rundt på dette
+tidspunktet, kun de siste metodene
+\texttt{append,\ clear,\ copy,\ count,\ extend,\ index,\ insert,\ pop,\ remove,\ reverse}
+og \texttt{sort}. I tillegg får du lengden av listen (antall elementer)
+når du skriver \texttt{len(somelist)}.
+
+\subsubsection{Løkker: while-løkken}\label{luxf8kker-while-luxf8kken}
+
+Frem til nå har python i beste fall vært en avansert kalkulator, som i
+tillegg kan telle som en helt og beregne lengden på ord og korte
+tekster. Problemet er at vi må gjøre svært mange instruksjoner selv, og
+gjenta nesten identiske instruksjoner. Hvis programmering er kjedelig,
+og man gjentar seg selv, finnes det garantert en bedre måte å gjøre det
+på!
+
+For å virkelig få fart på sakene, og slippe å gjenta oss selv, bruker vi
+løkker. Python kommer med to typer løkker: \texttt{for} - løkken og
+\texttt{while}-løkken.
+
+Vi begynner med sistnevnte.
+
+\begin{verbatim}
+while (condition):
+    #do something interesting
+    ...
+\end{verbatim}
+
+\subsubsection{For-løkker}\label{for-luxf8kker}
+
+\subsubsection{Lister og strenger}\label{lister-og-strenger}
+
+\begin{verbatim}
+navn = "Jens Ove Karlsen Kristiansen"
+
+navn_liste = navn.split()
+\end{verbatim}
+
+Argumenter til \texttt{.split}-metoden.
+
+\texttt{.strip}-metoden.
+
+\texttt{.join}-metoden.
+
+\subsubsection{Litteratur og tutorials}\label{litteratur-og-tutorials}
+
+\subparagraph{Deep copy og shallow
+copy}\label{deep-copy-og-shallow-copy}
+
+Se på følgende kode:
+
+\begin{verbatim}
+x = 5      # variabelen x får verdien 5
+y = x      # variabelen y får samme verdi som x
+y = 10
+print(x)
+\end{verbatim}
+
+Skriver programmet ut verdien til \texttt{x} - altså 5, eller skriver
+den ut 10? Uansett utfall - dette behøver en grundig forklaring!
+\href{https://www.python-course.eu/python3_deep_copy.php}{Tutorial -
+deep copy og shallow copy av lister}
+
+\end{document}

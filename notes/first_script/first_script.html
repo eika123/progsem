@@ -166,9 +166,20 @@ Out[5]: [0.1, 0.2, 0.3, 0.4]</code></pre>
 <p>Metoden <code>pop</code> returnerer (&quot;gir ut&quot;) den siste verdien i lista, men fjerner også denne verdien fra listen. Dette er svært nyttig dersom man bruker listen til å modellere for eksempel en kø, eller må sette ulike operasjoner datamaskinen skal gjøre i en kø.</p>
 <p>Du får opp metodene for en liste ved å lage en liste, f.eks <code>somelist</code> som over i python, og skrive <code>dir(somelist)</code>. Du trenger ikke tenke på metodene med dobbel understrek rundt på dette tidspunktet, kun de siste metodene <code>append, clear, copy, count, extend, index, insert, pop, remove, reverse</code> og <code>sort</code>. I tillegg får du lengden av listen (antall elementer) når du skriver <code>len(somelist)</code>.</p>
 <h3 id="løkker-while-løkken">Løkker: while-løkken</h3>
+<p>Frem til nå har python i beste fall vært en avansert kalkulator, som i tillegg kan telle som en helt og beregne lengden på ord og korte tekster. Problemet er at vi må gjøre svært mange instruksjoner selv, og gjenta nesten identiske instruksjoner. Hvis programmering er kjedelig, og man gjentar seg selv, finnes det garantert en bedre måte å gjøre det på!</p>
+<p>For å virkelig få fart på sakene, og slippe å gjenta oss selv, bruker vi løkker. Python kommer med to typer løkker: <code>for</code> - løkken og <code>while</code>-løkken.</p>
+<p>Vi begynner med sistnevnte.</p>
 <pre><code>while (condition):
     #do something interesting
     ...</code></pre>
+<h3 id="for-løkker">For-løkker</h3>
+<h3 id="lister-og-strenger">Lister og strenger</h3>
+<pre><code>navn = &quot;Jens Ove Karlsen Kristiansen&quot;
+
+navn_liste = navn.split()</code></pre>
+<p>Argumenter til <code>.split</code>-metoden.</p>
+<p><code>.strip</code>-metoden.</p>
+<p><code>.join</code>-metoden.</p>
 <h3 id="litteratur-og-tutorials">Litteratur og tutorials</h3>
 <h5 id="deep-copy-og-shallow-copy">Deep copy og shallow copy</h5>
 <p>Se på følgende kode:</p>

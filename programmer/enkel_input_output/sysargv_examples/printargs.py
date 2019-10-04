@@ -1,6 +1,6 @@
 import sys
 
-# this program prints "hello world!", and reads 3 arguments from the
+# this program prints "hello world!", and reads 2 arguments from the
 # command line and prints them to the user
 
 # write a greeting to the terminal
@@ -20,3 +20,5 @@ hello, world!
 argument 1:  dust
 argument 2:  mikkel
 """
+
+

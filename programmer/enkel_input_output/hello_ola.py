@@ -1,4 +1,4 @@
-fornavn = 'Kato'
-etternavn = 'Pedersen'
+fornavn = 'Ola'
+etternavn = 'Nordmann'
 
 print('Hello, ' + fornavn + ' ' + etternavn + '!')

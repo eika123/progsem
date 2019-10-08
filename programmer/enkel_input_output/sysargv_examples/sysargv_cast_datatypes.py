@@ -12,3 +12,4 @@ number2 = float(sys.argv[2])
 result = number1*number2
 
 print(result)
+

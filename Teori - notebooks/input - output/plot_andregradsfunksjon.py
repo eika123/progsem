@@ -1,18 +1,17 @@
+
 from pylab import *
-import sys
+import argparse
 
-#programmet plotter grafen til en funksjon a*x**2 + b*x + c
+parser = argparse.ArgumentParser()
+parser.add_argument('--a', type=float)
+parser.add_argument('--b', type=float)
+parser.add_argument('--c', type=float)
 
-# les inn nødvendige parametere for å representere funksjonen
-a = float(sys.argv[1])
-b = float(sys.argv[2])
-c = float(sys.argv[3])
+parser.add_argument('--xmin', type=float)
+parser.add_argument('--xmax', type=float)
 
-# les inn nødvendige parametere for xmin og xmax for plottet.
-# verdimengden behøver vi ikke bekymre oss om for plotting
-xmin = float(sys.argv[4])
-xmax = float(sys.argv[5])
-
+args = parser.parse_args()
+a, b, c, xmin, xmax = args.a, args.b, args.c, args.xmin, args.xmax
 
 N = round(abs(xmax - xmin)*100) # hundre punkter i et intervall med bredde 1
 
@@ -27,4 +26,3 @@ title(fr'${a}x^2 + {b}x + {c}$') # skriv funksjonsuttrykket i tittelen
 grid()
 
 show()
-

@@ -34,7 +34,7 @@ grid()
 
 # gcf: get current figure 
 fig = gcf()
-fig.set_size_inches(13, 10)
+fig.set_size_inches(10, 7)
 
 
 show()

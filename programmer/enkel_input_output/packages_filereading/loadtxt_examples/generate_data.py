@@ -70,16 +70,17 @@ def reynolds_number(rho, v, L, mu):
     return Re
 
 
-def drag_force(T, v, h, rho, parachute=False):
+def drag_force(T, v, h, rho, time_since_parachute_opened):
 
     # ad notam: rho model makes the vertical speed decrease linearly instead of being constant
     # at terminal velocity 
 
-    if parachute:
+    if time_since_parachute_opened:
         D = 11 # diameter in meters of parachute
         L = D/2
         r = D/2
-        A = pi*r**2
+        parachute_coeff = min(time_since_parachute_opened/8.0, 1)
+        A = max(parachute_coeff*pi*r**2, 1.5)
         mu = dynamic_viscosity(T) 
         Re = reynolds_number(rho, v, L, mu)
         if Re > 5.0E5:
@@ -134,7 +135,7 @@ def simulate_fall(height, mass, dt=5E-3):
     # make first timestep
     P, T, rho = barometric_pressure_temperature_density(h[0])
     G = gravity(h[0])*mass
-    D, Re, mu = drag_force(T, v[-1], h[-1], rho)
+    D, Re, mu = drag_force(T, v[-1], h[-1], rho, time_since_parachute_opened=0)
     sum_forces = D - G
     a = sum_forces/mass     # acceleration
     v_new = v0 + a*dt
@@ -150,11 +151,12 @@ def simulate_fall(height, mass, dt=5E-3):
     dynamic_viscosity_values.append(mu)
 
 
-    parachute = False
+    time_since_parachute_opened = 0
     while h[-1] > 0:
 
         if h[-1] < 2900:
-            parachute = True
+            time_since_parachute_opened += dt
+
         #parachute = False
 
         # get atmospheric parameters
@@ -162,7 +164,7 @@ def simulate_fall(height, mass, dt=5E-3):
 
         #G = gravity(h[-1])*mass
         G = 9.81*mass
-        D, Re, mu = drag_force(T, v[-1], abs(h[-1]), rho, parachute=parachute)
+        D, Re, mu = drag_force(T, v[-1], abs(h[-1]), rho, time_since_parachute_opened=time_since_parachute_opened)
 
         #D = simple_drag_force(v[-1], parachute)
         sum_forces = D - G
@@ -210,9 +212,9 @@ def calculate_atmospheric_parameters():
     return h, P, T, rho, temps, mu
 
 
-def simple_drag_force(v, parachute=False):
-    if parachute:
-        k = 1
+def simple_drag_force(v, time_since_parachute_opened):
+    if time_since_parachute_opened:
+        k = 1*min(1, time_since_parachute_opened/8)
     else:
         k = 0.1
     return k*v**2
@@ -249,8 +251,12 @@ def plot_atmospheric_parameters():
 
 
 if __name__ == '__main__':
+    from contextlib import closing
+    import shelve
 
-    height = 48000
+    from numpy import savetxt
+
+    height = 80000
     mass = 30
     #h, v, Re, t = simulate_fall(height, mass, dt=1E-3)
     h, v, t = simulate_fall(height, mass, dt=1E-3)
@@ -260,6 +266,7 @@ if __name__ == '__main__':
     ylabel('altitude [m]')
     grid()
     show()
+    figure()
 
     """
     plot(t, Re)
@@ -276,3 +283,19 @@ if __name__ == '__main__':
     ylabel('vertical speed [m]')
     grid()
     show()
+    figure()
+
+
+
+    """
+    The open command generates a context manager, which is important for 
+    handling external resources, such as files. In contrast to this command, 
+    shelve.open does not create a context manager by itself. 
+    The closing command from the contextlib module is needed to transform it 
+    into an appropriate context manager. Consider the following example of restoring the file:
+    """
+
+    
+
+    savetxt('jump_simulation_data_time_altitude.txt',[t, h] , delimiter=',', header='time, altitude')
+    savetxt('jump_simulation_data_time_velocity.txt',[t, v] , delimiter=',', header='time, velocity')

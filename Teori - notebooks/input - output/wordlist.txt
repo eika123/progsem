@@ -1,0 +1,32 @@
+python
+"hello, world!"
+Hello, World!
+"Hello, world!"
+forandre
+-
+bruke
+skrive
+tekst
+python
+tekst
+-
+helt
+bytes.
+'Hello, world!"
+bytes
+lesbart.
+tekst
+lese
+hvordan
+kalles
+abstraksjon
+konsept
+tegn
+bruke
+tre
+fire
+bytes.
+tall.
+bokstav
+byte
+byte

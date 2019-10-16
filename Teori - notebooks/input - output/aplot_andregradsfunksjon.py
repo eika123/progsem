@@ -14,12 +14,12 @@ xmin = float(sys.argv[4])
 xmax = float(sys.argv[5])
 
 
-N = round(abs(xmax - xmin)*100) # hundre punkter i et intervall med bredde 1
+N = ceil(abs(xmax - xmin)*100) # hundre punkter i et intervall med bredde 1
 
-# Lag et intervall med flyttall fra xmin til xmax med N punkter
+# Lag et intervall (array) med flyttall fra xmin til xmax med N punkter
 x = linspace(xmin, xmax, N)
 
-# beregn en y-verdi for hvert av flyttallene generert over
+# beregn en y-verdi for hvert av flyttallene i arrayet x
 y = a*x**2 + b*x + c
 
 plot(x, y)

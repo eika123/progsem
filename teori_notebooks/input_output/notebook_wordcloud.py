@@ -12,7 +12,7 @@ no_use_words = ['en', 'et', 'ei', 'vi', 'du', 'som', 'er', 'til', 'dere', 'jeg',
     'likevel', 'fra', 'med', 'skal', 'bruke', 'om', 'skriv', 'være', 'fleste', 'prøv', 'gate',\
     'slik', 'disse', 'slike', 'ikke', 'se', 'de', 'man', 'tullings', 'john', "martin'",\
     'x3', 'An', 'nordiske', 'AMD64', 'kåre', 'MSC', 'telefonnummer', 'da', 'blir',\
-    'marie', 'pøbelringen'
+    'marie', 'pøbelringen', 'ikke'
     ]
 
 no_use_words += [word.capitalize() for word in no_use_words]

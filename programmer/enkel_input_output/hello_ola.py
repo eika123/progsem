@@ -3,5 +3,3 @@ etternavn = 'Nordmann'
 
 hilsen = 'Hello, ' + fornavn + ' ' + etternavn + '!'
 print(hilsen)
-
-

@@ -1,4 +1,7 @@
 fornavn = 'Ola'
 etternavn = 'Nordmann'
 
-print('Hello, ' + fornavn + ' ' + etternavn + '!')
+hilsen = 'Hello, ' + fornavn + ' ' + etternavn + '!'
+print(hilsen)
+
+

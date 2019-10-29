@@ -10,7 +10,6 @@ class OpponentException(Exception):
     def __init__(self, message):
         super().__init__(message)
     
-    
 
 class Team:
 
@@ -34,6 +33,9 @@ class Team:
         else:
             return False
     
+    def __repr__(self):
+        return self.name
+    
 class Arena:
 
     arenas = []
@@ -49,6 +51,9 @@ class Arena:
     def set_games(self, games):
         self.games = games
 
+    def __repr__(self):
+        return self.name
+
 
 class Round:
 
@@ -63,9 +68,9 @@ class Round:
             raise ValueError('Finished setting up games, or no teams or arenas provided')
 
     def find_opponent(self, team, played, games, round_teams, arena):
-        print('finding matches...')
-        for opponent in team.opponents_remaining.sort(reverse=True,\
-            key=self._sort_key_rounds_rested):
+        #print('finding matches...')
+        team.opponents_remaining = sorted(team.opponents_remaining, reverse=True, key=self._sort_key_rounds_rested)
+        for opponent in team.opponents_remaining:
             # match!
             if opponent not in played and team not in played:
                 #set up match
@@ -83,7 +88,7 @@ class Round:
                 team.rounds_rested = 0
                 opponent.rounds_rested = 0
 
-                print("set up game and cleaned up...")
+                #print("set up game and cleaned up...")
                 return played, games, opponent
         return played, games, None
         #raise OpponentException('no suitable opponent found for team {}'.format(team.name))
@@ -105,12 +110,12 @@ class Round:
         # set up one game for each arena. Add teams to list played
         # to avoid double booking
         for arena in Arena.arenas:
-            print(arena.name, end=', ')
+            #print(arena.name, end=', ')
 
             k=-1
             while k >= -len(round_teams):
                 team = round_teams[k]
-                print(team.name, end = ' , ')
+                #print(team.name, end = ' , ')
                 if team.has_opponents() and team not in played:
                     played, games, opponent = self.find_opponent(team, played, games, round_teams, arena)
 
@@ -118,8 +123,8 @@ class Round:
                         # break of out of loop
                         k = -len(round_teams) - 1
                 k -= 1
-            print('')
-        print('returning games...')
+            #print('')
+        #print('returning games...')
         return games
 
 class Game:
@@ -145,14 +150,17 @@ class Game:
 def initiate_test_data():
 
     #team_names = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k']
-    team_names = ['a', 'b', 'c', 'd', 'e', 'f']
-    team_names = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']
+    team_names = ['alpha', 'beta', 'charlie', 'delta', 'echo', 'foxtrot']
+    #team_names = ['alpha', 'beta', 'charlie', 'delta', 'echo', 'foxtrot', 'golf', 'hotel', 'india', 'juliet', 'kilo', 'lima']
+    team_names = ['alpha', 'beta', 'charlie', 'delta', 'echo', 'foxtrot', 'golf', 'hotel', 'india', 'juliet', 'kilo', 'lima', 'mike', 'november',\
+        'oscar', 'papa', 'quebec', 'romeo', 'sierra', 'tango', 'uniform', 'whiskey', 'x-ray', 'yankee', 'zulu', 'manchester united', 'liverpool', 'arsenal']
+    
     """
     team_names = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k' ,'l', 'm',\
         'n', 'o', 'p']
     """
-    #arena_names = ['Old Trafford', 'Wembley', 'Camp Nou', 'Anfield']
-    arena_names = ['Old Trafford', 'Anfield', 'Wembley']
+    arena_names = ['Old Trafford', 'Wembley', 'Camp Nou', 'Anfield']
+    #arena_names = ['Old Trafford', 'Anfield', 'Wembley', 'Santiago Bernabéu', 'Camp Nou', 'Allianz Arena', 'Stamford Bridge', 'Emirates Stadium']
     for team_name in team_names:
         Team(team_name)
     
@@ -166,7 +174,7 @@ def initiate_test_data():
 
     while True:
         try:
-            print('--------------------------')
+            #print('--------------------------')
             Round()
         except ValueError:
             done_playing = {}
@@ -175,7 +183,7 @@ def initiate_test_data():
                     done_playing[team] = True
                 else:
                     done_playing[team] = False
-                    print(team.name + " not done")
+                    #print(team.name + " not done")
             if False in done_playing.values():
                 print('error occured')
             break
@@ -183,9 +191,12 @@ def initiate_test_data():
     print(' ')
     print('============== checking consistencies ===============')
     print(' ')
-    print(len(team_names)*(len(team_names) - 1)/2)
+    print('let n = len(team_names)')
+    print('n(n - 1)/2 = ', len(team_names)*(len(team_names) - 1)/2)
     print('lenght og Games.games: ', len(Game.games))
     print('sum of all games in arenas', sum([len(arena.games) for arena in Arena.arenas]))
+    print('=====================================================')
+    print('')
 
 def print_opponent_lists(team_list):
     for team in team_list:
@@ -196,16 +207,20 @@ def print_opponent_lists(team_list):
 
 def print_rounds():
     k = 1
+    print('')
+    print('=='*30 + " printing tournament setup " + '=='*30 )
+    print('')
     for round in Round.rounds:
-        print(k, end=' : ')
+        print('%3s' % (k), end=' :  |')
         for game in round.games:
             team_a = game.team_a
             team_b = game.team_b
             arena = game.arena
-
-            print('[ ' + team_a.name, ' - ', team_b.name, '| arena: ', arena.name + ' ]', end=',   ')
+            print('%17s %3s %17s  @  arena: %15s' % (team_a.name, ' - ', team_b.name, arena.name), end='|      ')
+            #print('[ ' + team_a.name, ' - ', team_b.name, '| arena: ', arena.name + ' ]', end=',   ')
         k += 1
         print(' ')
+    print('=='*(60 + 14))
 
 
 

@@ -1,0 +1,37 @@
+ 
+============== checking consistencies ===============
+ 
+let n = len(team_names)
+n(n - 1)/2 =  66.0
+lenght og Games.games:  66
+sum of all games in arenas 66
+=====================================================
+
+
+============================================================ printing tournament setup ============================================================
+
+  1 :  |      lima  -       alpha  @  arena:  Old Trafford|            kilo  -        beta  @  arena:       Wembley|          juliet  -     charlie  @  arena:      Camp Nou|       
+  2 :  |     india  -       delta  @  arena:  Old Trafford|           hotel  -        echo  @  arena:       Wembley|            golf  -     foxtrot  @  arena:      Camp Nou|       
+  3 :  |      lima  -        beta  @  arena:  Old Trafford|            kilo  -     charlie  @  arena:       Wembley|          juliet  -       alpha  @  arena:      Camp Nou|       
+  4 :  |     india  -        echo  @  arena:  Old Trafford|           hotel  -     foxtrot  @  arena:       Wembley|            golf  -       delta  @  arena:      Camp Nou|       
+  5 :  |      lima  -     charlie  @  arena:  Old Trafford|            kilo  -      juliet  @  arena:       Wembley|            beta  -       alpha  @  arena:      Camp Nou|       
+  6 :  |     india  -     foxtrot  @  arena:  Old Trafford|           hotel  -        golf  @  arena:       Wembley|            echo  -       delta  @  arena:      Camp Nou|       
+  7 :  |      lima  -      juliet  @  arena:  Old Trafford|            kilo  -       alpha  @  arena:       Wembley|         charlie  -        beta  @  arena:      Camp Nou|       
+  8 :  |     india  -        golf  @  arena:  Old Trafford|           hotel  -       delta  @  arena:       Wembley|         foxtrot  -        echo  @  arena:      Camp Nou|       
+  9 :  |      lima  -        kilo  @  arena:  Old Trafford|          juliet  -        beta  @  arena:       Wembley|         charlie  -       alpha  @  arena:      Camp Nou|       
+ 10 :  |     india  -       hotel  @  arena:  Old Trafford|            golf  -        echo  @  arena:       Wembley|         foxtrot  -       delta  @  arena:      Camp Nou|       
+ 11 :  |      lima  -       delta  @  arena:  Old Trafford|            kilo  -        echo  @  arena:       Wembley|          juliet  -     foxtrot  @  arena:      Camp Nou|       
+ 12 :  |   charlie  -        golf  @  arena:  Old Trafford|            beta  -       hotel  @  arena:       Wembley|           alpha  -       india  @  arena:      Camp Nou|       
+ 13 :  |      lima  -        echo  @  arena:  Old Trafford|            kilo  -     foxtrot  @  arena:       Wembley|          juliet  -       delta  @  arena:      Camp Nou|       
+ 14 :  |     india  -        beta  @  arena:  Old Trafford|           hotel  -       alpha  @  arena:       Wembley|            golf  -      juliet  @  arena:      Camp Nou|       
+ 15 :  |   charlie  -       delta  @  arena:  Old Trafford|            lima  -     foxtrot  @  arena:       Wembley|            kilo  -        golf  @  arena:      Camp Nou|       
+ 16 :  |      echo  -       alpha  @  arena:  Old Trafford|          juliet  -       hotel  @  arena:       Wembley|           india  -     charlie  @  arena:      Camp Nou|       
+ 17 :  |      beta  -       delta  @  arena:  Old Trafford|            lima  -        golf  @  arena:       Wembley|            kilo  -       hotel  @  arena:      Camp Nou|       
+ 18 :  |   foxtrot  -       alpha  @  arena:  Old Trafford|          juliet  -       india  @  arena:       Wembley|            echo  -     charlie  @  arena:      Camp Nou|       
+ 19 :  |      lima  -       hotel  @  arena:  Old Trafford|            kilo  -       delta  @  arena:       Wembley|            golf  -        beta  @  arena:      Camp Nou|       
+ 20 :  |    juliet  -        echo  @  arena:  Old Trafford|           india  -        kilo  @  arena:       Wembley|         foxtrot  -     charlie  @  arena:      Camp Nou|       
+ 21 :  |     alpha  -       delta  @  arena:  Old Trafford|            lima  -       india  @  arena:       Wembley|           hotel  -     charlie  @  arena:      Camp Nou|       
+ 22 :  |      golf  -       alpha  @  arena:  Old Trafford|            beta  -     foxtrot  @  arena:       Wembley|       
+ 23 :  |      echo  -        beta  @  arena:  Old Trafford|       
+ 24 :  | 
+====================================================================================================================================================

@@ -1,0 +1,1920 @@
+\documentclass[11pt]{article}
+
+    \usepackage[breakable]{tcolorbox}
+    \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
+    
+    \usepackage{iftex}
+    \ifPDFTeX
+    	\usepackage[T1]{fontenc}
+    	\usepackage{mathpazo}
+    \else
+    	\usepackage{fontspec}
+    \fi
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % Maintain compatibility with old templates. Remove in nbconvert 6.0
+    \let\Oldincludegraphics\includegraphics
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionFormat{nocaption}{}
+    \captionsetup{format=nocaption,aboveskip=0pt,belowskip=0pt}
+
+    \usepackage[Export]{adjustbox} % Used to constrain images to a maximum size
+    \adjustboxset{max size={0.9\linewidth}{0.9\paperheight}}
+    \usepackage{float}
+    \floatplacement{figure}{H} % forces figures to be placed at the correct location
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range
+    \makeatletter % fix for grffile with XeLaTeX
+    \def\Gread@@xetex#1{%
+      \IfFileExists{"\Gin@base".bb}%
+      {\Gread@eps{\Gin@base.bb}}%
+      {\Gread@@xetex@aux#1}%
+    }
+    \makeatother
+
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    % The default LaTeX title has an obnoxious amount of whitespace. By default,
+    % titling removes some of it. It also provides customization options.
+    \usepackage{titling}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{enkel\_input\_output}
+    
+    
+    
+    
+    
+% Pygments definitions
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb. 
+    \makeatletter
+        \newbox\Wrappedcontinuationbox 
+        \newbox\Wrappedvisiblespacebox 
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}} 
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}} 
+        \newcommand*\Wrappedcontinuationindent {3ex } 
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox} 
+        % Take advantage of the already applied Pygments mark-up to insert 
+        % potential linebreaks for TeX processing. 
+        %        {, <, #, %, $, ' and ": go to next line. 
+        %        _, }, ^, &, >, - and ~: stay at end of broken line. 
+        % Use of \textquotesingle for straight quote. 
+        \newcommand*\Wrappedbreaksatspecials {% 
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}% 
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}% 
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}% 
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}% 
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}% 
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}% 
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}% 
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}% 
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}% 
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}% 
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}% 
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}% 
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}% 
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}% 
+        } 
+        % Some characters . , ; ? ! / are not pygmentized. 
+        % This macro makes them "active" and they will insert potential linebreaks 
+        \newcommand*\Wrappedbreaksatpunct {% 
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}% 
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}% 
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}% 
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}% 
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}% 
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}% 
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}% 
+            \catcode`\.\active
+            \catcode`\,\active 
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active 
+            \lccode`\~`\~ 	
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+        
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active 	
+        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+    
+    % prompt
+    \makeatletter
+    \newcommand{\boxspacing}{\kern\kvtcb@left@rule\kern\kvtcb@boxsep}
+    \makeatother
+    \newcommand{\prompt}[4]{
+        \ttfamily\llap{{\color{#2}[#3]:\hspace{3pt}#4}}\vspace{-\baselineskip}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+\begin{document}
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{input-og-output-fra-programmer}{%
+\section{Input og output fra
+programmer}\label{input-og-output-fra-programmer}}
+
+    
+
+    Vi skal først se på hvordan vi kan skrive noen enkle programmer som
+leser inn input fra brukeren, gjør noe med denne inputen, og skriver noe
+ut igjen til brukeren.
+
+Vi starter med det aller enkleste, klassiske første programmet, nemlig
+et program som skriver ``hello, world!'' ut til brukeren når programmet
+kjøres.
+
+    \hypertarget{hello-world}{%
+\subsection{Hello, World!}\label{hello-world}}
+
+Dette programmet skriver ut teksten ``Hello, world!'' ut til brukeren.
+Prøv å forandre på teksten mellom hermetegnene å se hva som skjer.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello, World!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hello, World!
+    \end{Verbatim}
+
+    \textbf{Aktivitet:} Det anbefales at du kjører programmet slik at du vet
+hvordan du kjører python-programmer på din datamaskin.
+
+    \hypertarget{kort-obduksjon-av-programmet}{%
+\subsubsection{Kort ``obduksjon'' av
+programmet}\label{kort-obduksjon-av-programmet}}
+
+Programmet sender inn en \emph{streng} \texttt{"Hello,\ world!"} til
+\emph{funksjonen} \texttt{print}. Funksjonen \texttt{print} virker som
+et bindeledd mellom programmet og \texttt{standard\ output}. I mer
+avanserte anvendelser kan det være hendig å endre på denne - men
+vanligvis er det greit å bruke \texttt{print} til å skrive tekst ut til
+kommandolinjen eller slik du ser her
+
+    \hypertarget{konsepter}{%
+\subsubsection{Konsepter}\label{konsepter}}
+
+    \hypertarget{datatypen-streng}{%
+\paragraph{Datatypen streng}\label{datatypen-streng}}
+
+Du har møtt på datatypen \texttt{str}. En streng i python kan du tenke
+på som tekst. Husk at for en datamaskin er det bare en remse med
+bokstaver - helt i bunnen er det en remse med bytes. Teksten 'Hello,
+world!" er for eksempel følgende remse med bytes:
+
+\texttt{01001000\ 01100101\ 01101100\ 01101100\ 01101111\ 0101100\ 00100000\ 01110111\ 01101111\ 01110010\ 01101100\ 01100100\ 00100001}
+
+    Som du kanskje synes, er det ikke spesielt lesbart. Derfor er det
+skrevet programmer som gjør dette om til tekst du kan lese, uten at du
+trenger å tenke noe på hvordan programmet fungerer. Du trenger vanligvis
+ikke tenke på at programmet en gang eksisterer. Dette kalles i
+informatikken for \emph{abstraksjon}, og er et viktig konsept vi kommer
+tilbake til senere.
+
+    \hypertarget{funksjoner}{%
+\paragraph{Funksjoner}\label{funksjoner}}
+
+Du har møtt din første funksjon, nemlig \texttt{print}. Funksjonen
+\texttt{print} tar inn en streng og skriver det ut til
+kommandolinjen/under cellen. Funksjoner generelt i python tar inn en
+verdi og gjør noe med eller noe som avhenger av disse verdiene.
+
+    Remsen med bytes for å representere strengen \texttt{Hello,\ world!} er
+generert med med programmet under. Ikke bruk tid på å gruble over koden
+enda, du vil om tid og stunder forstå helt greit hva som står her.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} generer bytes for tegnene i strengen \PYZsq{}Hello, world!\PYZsq{} slik de samsvarer i standarden utf8}
+\PY{k}{for} \PY{n}{byte} \PY{o+ow}{in} \PY{n+nb}{map}\PY{p}{(}\PY{n+nb}{bin}\PY{p}{,} \PY{n+nb}{bytearray}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hello, world!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{byte}\PY{p}{,} \PY{n}{end}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0b1001000 0b1100101 0b1101100 0b1101100 0b1101111 0b101100 0b100000 0b1110111
+0b1101111 0b1110010 0b1101100 0b1100100 0b100001
+    \end{Verbatim}
+
+    \hypertarget{orienteringsstoff-om-strenger-og-utf8-encoding}{%
+\paragraph{Orienteringsstoff om strenger og
+utf8-encoding}\label{orienteringsstoff-om-strenger-og-utf8-encoding}}
+
+Standarden utf-8 bruker én byte for de fleste vanlige tegn. For nordiske
+tegn bruker den to bytes, og for mange spesielle tegn kan den bruke tre
+eller fire bytes.
+
+I tabellen under ser du noen eksempler med bytene representert som
+binære tall.
+
+~bokstav \textbar{} byte nummer 1 \textbar{} byte nummer 2 \textbar{}
+byte nummer 3 \textbar{} byte nummer 4 \textbar{}
+
+\textbar{}------------\textbar{}----------------\textbar{}----------------\textbar{}------------
+---\textbar{}---------------\textbar{} \textbar{} a \textbar{} 0b1100001
+\textbar{} \textbar{} \textbar{} \textbar{} \textbar{} b \textbar{}
+0b1100010 \textbar{} \textbar{} \textbar{} \textbar{} \textbar{} c
+\textbar{} 0b1100011 \textbar{} \textbar{} \textbar{} \textbar{}
+\textbar{} ä \textbar{} 0b11000011 \textbar{} 0b10100100 \textbar{}
+\textbar{} \textbar{} \textbar{} æ \textbar{} 0b11000011 \textbar{}
+0b10100110 \textbar{} \textbar{} \textbar{} \textbar{} ø \textbar{}
+0b11000011 \textbar{} 0b10111000 \textbar{} \textbar{} \textbar{}
+\textbar{} å \textbar{} 0b11000011 \textbar{} 0b10100101 \textbar{}
+\textbar{} \textbar{} \textbar{} à \textbar{} 0b11000011 \textbar{}
+0b10100000 \textbar{} \textbar{} \textbar{} \textbar{} â \textbar{}
+0b11000011 \textbar{} 0b10100010 \textbar{} \textbar{} \textbar{}
+\textbar{} π \textbar{} 0b11001111 \textbar{} 0b10000000 \textbar{}
+\textbar{} \textbar{} \textbar{} ℵ \textbar{} 0b11100010 \textbar{}
+0b10000100 \textbar{} 0b10110101 \textbar{} \textbar{} \textbar{} ∇
+\textbar{} 0b11100010 \textbar{} 0b10001000 \textbar{} 0b10000111
+\textbar{} \textbar{} \textbar{} 𣴯 \textbar{} 0b11110000 \textbar{}
+0b10100011 \textbar{} 0b10110100 \textbar{} 0b10101111 \textbar{}
+
+    \hypertarget{lese-input-fra-bruker}{%
+\subsubsection{Lese input fra bruker}\label{lese-input-fra-bruker}}
+
+Vi kan bruke kommandoen \texttt{input} til å lese input fra en bruker.
+Under ser du et eksempel
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} les input fra bruker og skriv ut en hilsen me brukerens navn}
+\PY{n}{name} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hva er navnet ditt? Skriv her: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hallo }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{name} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{!}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hva er navnet ditt? Skriv her:  Eindride
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hallo Eindride!
+    \end{Verbatim}
+
+    \hypertarget{kort-obduksjon}{%
+\subsubsection{Kort obduksjon}\label{kort-obduksjon}}
+
+Programmet ignorerer teksten bak tegnet \texttt{\#}. Teksten bak dette
+tegnet er en kommentar for å gjøre koden lettere å lese for mennesker.
+
+Programmet kaller på en funksjon \texttt{input}. Argumentet til
+\texttt{input} er strengen
+\texttt{Hva\ er\ navnet\ ditt?\ Skriv\ her:\ \textbackslash{}}. Denne
+strengen blir skrevet ut til kommandolinje / under cellen. Poenget med
+denne beskjeden er å informere brukeren om hva slags input som skal
+skrives inn. Deretter lagres det brukeren mater inn i programmet fra
+kommandolinjen i \emph{variabelen} \texttt{name}.
+
+    \textbf{Det anbefales nå at du gjør oppgave 1, 2 og 3}
+
+    \hypertarget{flere-konsepter}{%
+\subsubsection{Flere konsepter}\label{flere-konsepter}}
+
+    \hypertarget{variabler}{%
+\paragraph{Variabler}\label{variabler}}
+
+En variabel i Python kan du tenke på som navnet på en adresse i minnet
+til datamaskinen. Å lagre data i variabler gjør koden enklere å lese, og
+vi kan kombinere dataene med andre data på mange ulike måter.
+
+Legg til deg gode vaner, og start å bruke variabler allerede nå!
+
+    Store programmer kan være vanskelige å lese. For å gjøre programmene mer
+lesbare, er det viktig at du lager \emph{beskrivende} navn til
+variablene dine. Dersom variabelen inneholder navnet til en kunde, kan
+den f.eks hete \texttt{navn}, men et enda bedre navn er da
+\texttt{kunde\_navn}.
+
+\textbf{NB!} Et lite aber er når vi jobber med matematikk - da ønsker vi
+å velge variablene slik at koden minner mest mulig om de matematiske
+utrykkene.
+
+    \hypertarget{kommentarer}{%
+\paragraph{Kommentarer}\label{kommentarer}}
+
+Kommentarer i python starter med tegnet \texttt{\#}. Kommentarene blir
+ikke kjørt som kode, men ignorert av datamaksinen når du kjører
+programmet. De gjør det lettere å forstå koden! Dersom kommentaren skal
+gå over flere linjer, bruker vi en såkalt doc-string. Du kan skrive dem
+med tredoble anførselstegn (dobbel x3 \texttt{"""} eller enkel x3
+\texttt{\textquotesingle{}\textquotesingle{}\textquotesingle{}}).
+
+    Du kan bruke kommentarer til å holde orden på enheter, og fortelle i
+korte trekk hva en samling kommandoer skal gjøre. Skriv heller for mange
+kommentarer enn for få! Det er aldri et problem at kode er \emph{for
+godt dokumentert}. Blir dokumentasjonen for lang, har de fleste
+\emph{editorer} der koden skrives funksjonalitet for å ``kollapse''
+tekst slik at du ikke trenger å bla i teksten, men kan åpne det du
+trenger å se. En svært vanlig ``nybegynnerfeil'' er å slurve med
+kommentarer, for deretter å bruke lang tid på å forstå egen kode noen
+dager eller uker senere. Å skrive gode kommentarer er en ferdighet på
+lik linje med selve programmeringen, og blir svært viktig når man
+arbeider i team med andre mennesker.
+
+    Under ser du et eksempel på kode der vi har skrevet en del kommentarer
+Prøv å bruke kommentarene til å forstå hva koden gjør i hvert steg. Som
+du ser blir ikke tabellen helt ``fint'' formatert. Vi skal senere se på
+hvordan dette kan gjøres.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{46}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s+sd}{Dette programmet viser noen egenskaper ved strenger:}
+\PY{l+s+sd}{Hvis vi multipliserer en streng med et heltall n, gjentas strengen n antall ganger.}
+\PY{l+s+sd}{Når to strenger a og b legges sammen, føyes teksten i b på teksten i a.}
+\PY{l+s+sd}{For eksempel blir \PYZsq{}Martin\PYZsq{} + \PYZsq{} Andersen\PYZsq{} til strengen \PYZsq{}Martin Andersen\PYZsq{}}
+
+\PY{l+s+sd}{Koden skriver ut en tabell med fornavn, telefonnummer og adresse}
+\PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{10} \PY{c+c1}{\PYZsh{} antall mellomrom}
+\PY{n}{mellomrom} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{  }\PY{l+s+s2}{\PYZdq{}}\PY{o}{*}\PY{n}{n}
+
+\PY{c+c1}{\PYZsh{} Tabelloverskrifter}
+\PY{n}{tlf} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Telefon}\PY{l+s+s2}{\PYZdq{}}
+\PY{n}{adr} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Adresse}\PY{l+s+s2}{\PYZdq{}}
+\PY{n}{nvn} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Navn}\PY{l+s+s2}{\PYZdq{}}
+
+\PY{c+c1}{\PYZsh{} Innhold i tabellen.}
+\PY{c+c1}{\PYZsh{} Merk at etter semikolon kan en ny kommando skrives uten å starte en ny linje}
+\PY{n}{navn1} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Kåre}\PY{l+s+s2}{\PYZdq{}}\PY{p}{;} \PY{n}{telefon1} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{91248953}\PY{l+s+s2}{\PYZdq{}}\PY{p}{;} \PY{n}{adresse1} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pøbelringen 5}\PY{l+s+s2}{\PYZdq{}}
+\PY{n}{navn2} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Marie}\PY{l+s+s2}{\PYZdq{}}\PY{p}{;} \PY{n}{telefon2} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{39025847}\PY{l+s+s2}{\PYZdq{}}\PY{p}{;} \PY{n}{adresse2} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{John Tullings Gate 10}\PY{l+s+s2}{\PYZdq{}}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{nvn} \PY{o}{+} \PY{n}{mellomrom} \PY{o}{+} \PY{n}{tlf} \PY{o}{+} \PY{n}{mellomrom} \PY{o}{+} \PY{n}{adr}\PY{p}{)} \PY{c+c1}{\PYZsh{} tabelloverskrifter}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{*}\PY{l+m+mi}{35}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{navn1} \PY{o}{+} \PY{n}{mellomrom} \PY{o}{+} \PY{n}{telefon1} \PY{o}{+} \PY{n}{mellomrom} \PY{o}{+} \PY{n}{adresse1}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{navn2} \PY{o}{+} \PY{n}{mellomrom} \PY{o}{+} \PY{n}{telefon2} \PY{o}{+} \PY{n}{mellomrom} \PY{o}{+} \PY{n}{adresse2}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Navn                    Telefon                    Adresse
+----------------------------------------------------------------------
+Kåre                    91248953                    Pøbelringen 5
+Marie                    39025847                    John Tullings Gate 10
+    \end{Verbatim}
+
+    \hypertarget{minne-puxe5-datamaskinen}{%
+\paragraph{Minne på datamaskinen}\label{minne-puxe5-datamaskinen}}
+
+Det kan være lurt å tenke på minnet i datamaskinen som en lang remse med
+hus som hver inneholder 8 bokser. I hver av disse boksene kan vi sette
+enten verdien 0 eller 1. Vi kaller disse verdiene \textbf{bits}
+
+Et hus er da en \textbf{byte}, og vi kan tenke på navnet til en variabel
+som adressen til huset. Nå er det ikke likevel alltid helt \emph{så}
+enkelt, da vi for eksempel trenger åtte bytes til å representere for
+eksempel et flyttall. Men så lenge disse ligger inntil og i en bestemt
+retning fra vår adresse, går dette helt greit!
+
+    Bits i minnet til datamaskinen representert ved at en transistor styrer
+strøm til en kondensator. Ved å måle spenningen over kondensatoren vet
+man om transistoren er slått ``av eller på'', og dermed kan man lese av
+verdien 1 når spenningen er over 50\% av en ``maksverdi'', og 0 ellers.
+Du kan lese mer her: \url{https://computer.howstuffworks.com/ram.htm}.
+
+    \hypertarget{bruk-av-ipython-som-en-kalkulator}{%
+\subsection{Bruk av ipython som en
+kalkulator}\label{bruk-av-ipython-som-en-kalkulator}}
+
+Vi kan bruke ipyhon som en kalkulator. Hvis du har en åpen terminal, kan
+du skrive inn kommandoen \texttt{ipython}. Da får du noe som ser ut som
+i kodesnutten under Ofte ønsker vi å bruke matematiske funksjoner som
+ikke er med i python fra før. Da må vi importere dem. Det kan vi gjøre
+med kommandoen \texttt{from\ pylab\ import\ *}. Vi importerer da alle
+kommandoer fra pakken \texttt{pylab}.
+
+    \hypertarget{eksempel}{%
+\subsubsection{Eksempel}\label{eksempel}}
+
+Under har vi regnet ut verdien av utrykket
+\[ 5\sqrt{2} + \left(\frac{3}{4}\right)^2.\]
+
+\begin{verbatim}
+In [1]: from pylab import *
+
+In [2]: 5*sqrt(2) + (3/4)**2
+Out[2]: 7.6335678118654755
+
+In [3]: pi
+Out[3]: 3.141592653589793
+\end{verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{pylab} \PY{k}{import} \PY{o}{*}
+\PY{l+m+mi}{5}\PY{o}{*}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+7.6335678118654755
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \hypertarget{sammensatte-utrykk}{%
+\paragraph{Sammensatte utrykk}\label{sammensatte-utrykk}}
+
+Regn ut verdien av utrykket \[E = gv^n + \frac{b}{|u - w| + 1},\]
+
+for \(g = 14000\), \(v = 1.0275\), \(n=20\) og \(b=2.3\cdot10^{4}\).
+
+    I eksempelet under har vi definert tre variable \texttt{g}, \texttt{v},
+\texttt{n}, og \texttt{b}. Vi gjør noen beregninger med disse og lagrer
+dem inn i variabelen \texttt{E}.
+
+\begin{verbatim}
+Python 3.6.7 (default, Jul  2 2019, 02:21:41) [MSC v.1900 64 bit (AMD64)]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.8.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: g = 14000
+
+In [2]: v = 1.0275
+
+In [3]: n = 20
+
+In [4]: b = 2.3E4
+
+In [5]: u = 45
+
+In [6]: w = 36
+
+In [7]: E = g*v**n + b/(abs(u - w) + 1)
+
+In [8]: E
+Out[8]: 26385.99803800328
+\end{verbatim}
+
+    Hvis du jobber i en notebook, kan du gjøre slike interaktive beregninger
+i en kode-celle. Prøv deg på noen av oppgavene under
+
+    \textbf{Aktivitet: oppgave 4 til oppgave 10}
+
+    \hypertarget{flyttall}{%
+\subsection{Flyttall}\label{flyttall}}
+
+Til å starte med kan du tenke på flyttall som et desimaltall lagret på
+datamaskinen. På engelsk kalles flyttal for \emph{floating point
+number}, eller i korthet bare \emph{float}. Derav navnet på datatypen i
+eksempelet over. Likevel er det noen spesielle egenskaper ved flyttall
+det er vel verd å være oppmerksom på.
+
+Eksempelet under illustrerer et av problemene ved flyttall. Hvordan kan
+vi forklare hva som skjer - og er dette generelt litt skummelt?
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{inaccurate\PYZus{}approximation} \PY{o}{=} \PY{l+m+mf}{1E23}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Skriv ut tallet inaccurate\PYZus{}approximation }
+\PY{c+c1}{\PYZsh{} med fire desimalers nøyaktighet}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}inaccurate\PYZus{}approximation:.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+33333333333333327740928.0000
+    \end{Verbatim}
+
+    Dette ser kanskje ikke lovende ut. Men med nærmere inspeksjon er det
+kanskje ikke så ille som det ser ut som. Vi må telle 15 siffer til høyre
+for det første sifferet. Den relative feilen er da omtrentlig av
+størrelsesorden
+
+\[\epsilon \approx \frac{10^{15}}{10^{22}} = 10^{-7}.\]
+
+Det bruker å gå fint å gjøre beregninger med flyttall - men vi skal
+senere se litt på noen tilfeller der det likevel ikke går fullt så bra.
+
+    \hypertarget{heltall}{%
+\subsection{Heltall}\label{heltall}}
+
+Heltall har i python typen \texttt{int}. I motsetning til flyttall, kan
+alle heltall representeres nøyaktig, så lenge de ikke er altfor store.
+Python har ingen ``hard grense'' på hvor store heltall kan være slik
+mange andre språk har, men begrensningen går på hvor stor plass det er
+tilgjengelig i minnet til datamaskinen.
+
+Du kan gjøre en int \texttt{i} om til en float \texttt{f} ved kommandoen
+\texttt{f\ =\ float(i)}. Hvis du skal runde av et desimaltall \texttt{f}
+til et heltall \texttt{i}, kan du bruke kommandoen
+\texttt{i\ =\ int(round(f))}.
+
+    \hypertarget{regnerekkefuxf8lge}{%
+\subsection{Regnerekkefølge}\label{regnerekkefuxf8lge}}
+
+Du lurer kanskje på hvordan python prioriterer mellom operasjonene
+\texttt{+}, \texttt{-}, \texttt{*} og \texttt{/}. Regnerekkefølgen er
+den ``vanlige'': 1. Paranteser 2. Eksponenter, røtter, funksjoner 3.
+multiplikasjon og divisjon 4. addisjon og subtraksjon
+
+Utrykkene leses fra venstre til høyre. Når to operasjoner har lik
+prioritet, utføres den lengst til venstre først.
+
+    \hypertarget{eksempel}{%
+\subsubsection{Eksempel}\label{eksempel}}
+
+\begin{verbatim}
+# Programmet skal regne ut kraften i en hydraulisk jekk på én av stemplene.
+# Definer parametere
+A1 = 10
+F = 30
+A2 = 15
+
+# Regn ut krafta
+F2 = F/A1*A2
+\end{verbatim}
+
+    Utrykket \texttt{F/A1*A2} leses fra venstre til høyre, og operasjonene
+har lik prioritet. Altså regnes først \texttt{F/A1} ut. Deretter
+multipliseres dette med \texttt{A2}.
+
+    \hypertarget{tall-som-input-fra-bruker}{%
+\subsection{Tall som input fra bruker}\label{tall-som-input-fra-bruker}}
+
+    Hvis vi ønsker å lese inn et tall, må vi fortelle Python at det er et
+tall vi er ute etter
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{name} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hva er navnet ditt? Skriv her: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hallo }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{name} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{!}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+
+\PY{n}{height\PYZus{}centimeters} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hvor høy er du? Gi svaret i cm uten enheter.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{}gjør strengen height\PYZus{}centimeters om til en float}
+\PY{n}{height\PYZus{}centimeters} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{height\PYZus{}centimeters}\PY{p}{)}
+
+\PY{n}{height\PYZus{}meters} \PY{o}{=} \PY{n}{height\PYZus{}centimeters}\PY{o}{/}\PY{l+m+mi}{100}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Høyden din i meter er:  }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{height\PYZus{}meters}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{input-fra-kommandolinje}{%
+\subsection{Input fra kommandolinje}\label{input-fra-kommandolinje}}
+
+Når vi lager programmer vi kjører ofte, er det vanligvis lettere å gi
+input fra kommandolinjen. Til dette kan vi bruke pakken \texttt{sys}
+Under ser du et utsnitt av et program \texttt{add\_args.py} som tar inn
+to tall fra kommandolinjen og skriver ut summen av dem.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{42}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{!}ls
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+add\_args.py
+enkel\_input\_output.ipynb
+hello\_you.py
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{45}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{\PYZpc{}\PYZpc{}writefile} add\PYZus{}args.py
+\PY{k+kn}{import} \PY{n+nn}{sys}
+
+
+\PY{n}{a} \PY{o}{=} \PY{n}{sys}\PY{o}{.}\PY{n}{argv}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{c+c1}{\PYZsh{} legg første argument fra kommandolinjen inn i a}
+\PY{n}{a} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{a}\PY{p}{)}    \PY{c+c1}{\PYZsh{} omgjør a fra streng til desimaltall}
+
+\PY{n}{b} \PY{o}{=} \PY{n}{sys}\PY{o}{.}\PY{n}{argv}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{c+c1}{\PYZsh{} Legg andre argument fra kommandolinjen inn i b}
+\PY{n}{b} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Overwriting add\_args.py
+    \end{Verbatim}
+
+    Vi kan nå kjøre programmet. Enten fra notebooken som i cellen under,
+eller fra en terminal. Tilsvarende kjøring fra kommandolinjen ville vi
+fått med kommandoen \texttt{python\ add\_args.py\ 1.5\ 2.8}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{49}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{run} \PY{n}{add\PYZus{}args}\PY{o}{.}\PY{n}{py} \PY{l+m+mf}{1.5} \PY{l+m+mf}{2.8}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+4.3
+    \end{Verbatim}
+
+    \textbf{Aktivitet: Oppgaver 11 - 15}
+
+    \hypertarget{orienteringsstoff-et-veldig-typisk-eksempel}{%
+\subsubsection{Orienteringsstoff: Et veldig typisk
+eksempel}\label{orienteringsstoff-et-veldig-typisk-eksempel}}
+
+Vi tar et kort eksempel på hvordan input kan leses fra kommandolinjen.
+Vi skal i de neste notebookene se på hvilke konsepter som brukes i
+programmet slik at du snart skal kunne skrive slike programmer selv
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{1}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{\PYZpc{}\PYZpc{}writefile} aplot\PYZus{}andregradsfunksjon.py
+\PY{k+kn}{from} \PY{n+nn}{pylab} \PY{k}{import} \PY{o}{*}
+\PY{k+kn}{import} \PY{n+nn}{sys}
+
+\PY{c+c1}{\PYZsh{}programmet plotter grafen til en funksjon a*x**2 + b*x + c}
+
+\PY{c+c1}{\PYZsh{} les inn nødvendige parametere for å representere funksjonen}
+\PY{n}{a} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{sys}\PY{o}{.}\PY{n}{argv}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\PY{n}{b} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{sys}\PY{o}{.}\PY{n}{argv}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\PY{n}{c} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{sys}\PY{o}{.}\PY{n}{argv}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} les inn nødvendige parametere for xmin og xmax for plottet.}
+\PY{c+c1}{\PYZsh{} verdimengden behøver vi ikke bekymre oss om for plotting}
+\PY{n}{xmin} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{sys}\PY{o}{.}\PY{n}{argv}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+\PY{n}{xmax} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{sys}\PY{o}{.}\PY{n}{argv}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+
+
+\PY{n}{N} \PY{o}{=} \PY{n}{ceil}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{xmax} \PY{o}{\PYZhy{}} \PY{n}{xmin}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)} \PY{c+c1}{\PYZsh{} hundre punkter i et intervall med bredde 1}
+
+\PY{c+c1}{\PYZsh{} Lag et intervall (array) med flyttall fra xmin til xmax med N punkter}
+\PY{n}{x} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{n}{xmin}\PY{p}{,} \PY{n}{xmax}\PY{p}{,} \PY{n}{N}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} beregn en y\PYZhy{}verdi for hvert av flyttallene i arrayet x}
+\PY{n}{y} \PY{o}{=} \PY{n}{a}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{b}\PY{o}{*}\PY{n}{x} \PY{o}{+} \PY{n}{c}
+
+\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{}pynt på grafen}
+\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{24}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{xticks}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{16}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{)}
+\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{24}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{yticks}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{16}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{title}\PY{p}{(}\PY{n}{fr}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+si}{\PYZob{}a\PYZcb{}}\PY{l+s+s1}{x\PYZca{}2 + }\PY{l+s+si}{\PYZob{}b\PYZcb{}}\PY{l+s+s1}{x + }\PY{l+s+si}{\PYZob{}c\PYZcb{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{32}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} skriv funksjonsuttrykket i tittelen}
+\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} gcf: get current figure }
+\PY{n}{fig} \PY{o}{=} \PY{n}{gcf}\PY{p}{(}\PY{p}{)}
+\PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}
+
+
+\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Overwriting aplot\_andregradsfunksjon.py
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{run} \PY{n}{aplot\PYZus{}andregradsfunksjon}\PY{o}{.}\PY{n}{py} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2} \PY{l+m+mi}{2} \PY{l+m+mi}{5} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2} \PY{l+m+mi}{3}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{enkel_input_output_files/enkel_input_output_52_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Det er nå enkelt å endre på parametrene funksjonen får inn. Prøv selv!
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{orienteringsstoff-bruk-av-pakken-argparse-nuxe5r-mange-argumenter-skal-leses-inn}{%
+\subsection{Orienteringsstoff: Bruk av pakken argparse når mange
+argumenter skal leses
+inn}\label{orienteringsstoff-bruk-av-pakken-argparse-nuxe5r-mange-argumenter-skal-leses-inn}}
+
+du synes kanskje at det kan være vanskelig å holde styr på hvilke
+argumenter som skal leses inn til programmet over. Vi kan lette dette
+ved å bruke pakken \texttt{argparse}. Da kan vi kjøre programmet ved å
+bruke \emph{key-value pairs}.
+
+\texttt{run\ plot\_andregradsfunksjon.py\ -\/-a\ 0\ -\/-b\ 2\ -\/-c\ 5\ -\/-xmin\ -2\ -\/-xmax\ 3}
+
+Det vil da være lettere for brukeren å holde styr på hvilke argumenter
+som er hva
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{38}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{\PYZpc{}\PYZpc{}writefile} plot\PYZus{}andregradsfunksjon.py
+
+\PY{k+kn}{from} \PY{n+nn}{pylab} \PY{k}{import} \PY{o}{*}
+\PY{k+kn}{import} \PY{n+nn}{argparse}
+
+
+\PY{n}{parser} \PY{o}{=} \PY{n}{argparse}\PY{o}{.}\PY{n}{ArgumentParser}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} lag et objekt parser som kan lese input fra kommandolinjen}
+
+\PY{c+c1}{\PYZsh{} definer forventede argumenter fra kommandolinjen med key\PYZhy{}value pairs}
+\PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}argument}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{type}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+\PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}argument}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{type}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+\PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}argument}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{type}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+
+\PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}argument}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}xmin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{type}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+\PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}argument}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}xmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{type}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} antall grid\PYZhy{}punkter i et intervall med lengde 1}
+\PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}argument}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}grid\PYZus{}density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{type}\PY{o}{=}\PY{n+nb}{int}\PY{p}{,} \PY{n}{default}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} les argumentene fra kommandolinjen}
+\PY{n}{args} \PY{o}{=} \PY{n}{parser}\PY{o}{.}\PY{n}{parse\PYZus{}args}\PY{p}{(}\PY{p}{)}
+\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{c}\PY{p}{,} \PY{n}{xmin}\PY{p}{,} \PY{n}{xmax}\PY{p}{,} \PY{n}{grid\PYZus{}density} \PY{o}{=} \PY{n}{args}\PY{o}{.}\PY{n}{a}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{b}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{c}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{xmin}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{xmax}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{grid\PYZus{}density}
+
+\PY{n}{N} \PY{o}{=} \PY{n+nb}{round}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{xmax} \PY{o}{\PYZhy{}} \PY{n}{xmin}\PY{p}{)}\PY{o}{*}\PY{n}{grid\PYZus{}density}\PY{p}{)} \PY{c+c1}{\PYZsh{} antall punkter i gridet}
+
+\PY{n}{x} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{n}{xmin}\PY{p}{,} \PY{n}{xmax}\PY{p}{,} \PY{n}{N}\PY{p}{)}
+\PY{n}{y} \PY{o}{=} \PY{n}{a}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{b}\PY{o}{*}\PY{n}{x} \PY{o}{+} \PY{n}{c}
+
+\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+
+\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{;} \PY{n}{xticks}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{)}
+\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{;} \PY{n}{yticks}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{)}
+
+\PY{n}{title}\PY{p}{(}\PY{n}{fr}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+si}{\PYZob{}a\PYZcb{}}\PY{l+s+s1}{x\PYZca{}2 + }\PY{l+s+si}{\PYZob{}b\PYZcb{}}\PY{l+s+s1}{x + }\PY{l+s+si}{\PYZob{}c\PYZcb{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)} \PY{c+c1}{\PYZsh{} skriv funksjonsuttrykket i tittelen}
+\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+
+
+\PY{c+c1}{\PYZsh{} gcf: get current figure }
+\PY{n}{fig} \PY{o}{=} \PY{n}{gcf}\PY{p}{(}\PY{p}{)}
+\PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}
+
+
+\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Overwriting plot\_andregradsfunksjon.py
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{39}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{run} \PY{n}{plot\PYZus{}andregradsfunksjon}\PY{o}{.}\PY{n}{py} \PY{o}{\PYZhy{}}\PY{o}{\PYZhy{}}\PY{n}{a} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5} \PY{o}{\PYZhy{}}\PY{o}{\PYZhy{}}\PY{n}{b} \PY{l+m+mi}{3} \PY{o}{\PYZhy{}}\PY{o}{\PYZhy{}}\PY{n}{c} \PY{l+m+mi}{2} \PY{o}{\PYZhy{}}\PY{o}{\PYZhy{}}\PY{n}{xmin} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.5} \PY{o}{\PYZhy{}}\PY{o}{\PYZhy{}}\PY{n}{xmax} \PY{l+m+mi}{7}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{enkel_input_output_files/enkel_input_output_56_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{orienteringsstoff-lesing-av-data-med-loadtxt}{%
+\subsection{\texorpdfstring{Orienteringsstoff: Lesing av data med
+\texttt{loadtxt}}{Orienteringsstoff: Lesing av data med loadtxt}}\label{orienteringsstoff-lesing-av-data-med-loadtxt}}
+
+    Når vi gjør store simuleringer eller har måledata, kan vi bruke pakken
+\texttt{loadtxt} fra \texttt{numpy} til å lese store filer inn i såkalte
+\emph{arrays}. (Du kan for øyeblikket tenket på de som lange remser med
+tall lagret i minnet på datamaskinen).
+
+\hypertarget{aktivitet}{%
+\paragraph{Aktivitet}\label{aktivitet}}
+
+En av dine venner har sett video på youtube og ønsker å hoppe fra
+verdensrommet med en romdrakt. Felix Baumgarter hoppet i 2012 fra 39,045
+meter( https://www.youtube.com/watch?v=FHtvDA0W34I ). Vennen din ønsker
+å doble dette, men du er usikkert på om det er trygt. Du har fått
+tilgang til simuleringer i en fil
+\texttt{jump\_simulation\_data\_time\_altitude.txt} og
+\texttt{jump\_simulation\_data\_time\_velocity.txt}. Bruk
+\texttt{numpy.loadtxt} til å laste data fra filene inn i arrays og plot
+dem.
+
+Under ser du hvordan \texttt{jump\_simulation\_data\_time\_altitude.txt}
+lastes inn i arrays \texttt{t} og \texttt{v}.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{14}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{pylab} \PY{k}{import} \PY{o}{*}
+\PY{n}{t}\PY{p}{,} \PY{n}{h} \PY{o}{=} \PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{jump\PYZus{}simulation\PYZus{}data\PYZus{}time\PYZus{}altitude.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{a}{%
+\subparagraph{a)}\label{a}}
+
+Last inn hastighetene fra filen
+\texttt{jump\_simulation\_data\_time\_velocity.txt}. Plot både
+hastigheten og høyden som funksjoner av tiden.
+
+Vurder om det er trygt for vennen din å hoppe fra 80000 meter.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Bruk pakken \texttt{numpy.savetxt} til å lagre dataene fra arrayene i
+  én fil. kallet er da
+\end{enumerate}
+
+\texttt{savetxt(\textquotesingle{}filnavn\textquotesingle{},\ {[}t,\ v,\ h{]},\ delimiter=\textquotesingle{},\textquotesingle{},\ header=\textquotesingle{}time,\ velocity,\ altitude\textquotesingle{})}
+
+    \hypertarget{litt-om-skriving-til-fil}{%
+\subsection{Litt om skriving til fil}\label{litt-om-skriving-til-fil}}
+
+De finnes flere måter å skrive til fil. Man kan skrive linje for linje
+eller bruke pakker slik som her.
+
+Hvis du skal skrive store mengder data anbefales \texttt{savetxt} eller
+å bruke modulen \texttt{shelve}. Med modulen \texttt{shelve} kan du også
+lagre ethvert type objekt til fil. Du kan dermed lagre tilstanden
+programmet ditt er i og kjøre det senere, eller hente opp egendefinerte
+datastrukturer.
+
+Hvis du er nysjerrig kan du allerede nå se hvordan man kan skrive
+informasjon til fil i denne videoen til
+\href{https://www.youtube.com/watch?v=Uh2ebFW8OYM}{Corey Shafer}.
+
+Vi skal senere se på hvordan dette gjøres i litt mer detalj
+
+    \hypertarget{oppsummering}{%
+\section{Oppsummering}\label{oppsummering}}
+
+\hypertarget{gode-vaner}{%
+\subsection{Gode vaner}\label{gode-vaner}}
+
+\begin{itemize}
+\item
+  \textbf{variabler} En variabel i python kan inneholde alle typer
+  objekter. De gjør det lettere å lese programmet, og gir det mer
+  fleksibilitet til å bygge opp programmet ditt
+\item
+  \textbf{variabelnavn} Velg gode navn til variablene dine. Er det en
+  matematisk formel, bør du gjøre koden mest mulig lik de matematiske
+  utrykkkene. Er det noe annet, velg et nøye uttenkt og beskrivende navn
+  til variabelen din
+\item ~
+  \hypertarget{kommentarer-en-kommentar-i-python-starter-med-en-hashtag-eller-kan-gis-som-en-doc-string.-kommentarer-gjuxf8r-koden-din-lettere-uxe5-lese-for-andre-mennesker---ikke-minst-deg-selv-om-2-3-dager-uker-eller-muxe5neder.}{%
+  \subsection{\texorpdfstring{\textbf{kommentarer} En kommentar i python
+  starter med en hashtag (\texttt{\#}) eller kan gis som en doc-string.
+  Kommentarer gjør koden din lettere å lese for andre mennesker - ikke
+  minst deg selv om 2-3 dager, uker eller
+  måneder.}{kommentarer En kommentar i python starter med en hashtag (\#) eller kan gis som en doc-string. Kommentarer gjør koden din lettere å lese for andre mennesker - ikke minst deg selv om 2-3 dager, uker eller måneder.}}\label{kommentarer-en-kommentar-i-python-starter-med-en-hashtag-eller-kan-gis-som-en-doc-string.-kommentarer-gjuxf8r-koden-din-lettere-uxe5-lese-for-andre-mennesker---ikke-minst-deg-selv-om-2-3-dager-uker-eller-muxe5neder.}}
+\end{itemize}
+
+\hypertarget{vanlige-datatyper}{%
+\subsection{Vanlige datatyper}\label{vanlige-datatyper}}
+
+\begin{itemize}
+\item
+  \texttt{str} - datatypen streng i python. En remse med tekst.
+\item
+  \texttt{float} - datatypen flyttall i python. En etterlikning av
+  desimaltall. I motsetning til reelle tall finnes det bare et endelig
+  antall flyttall på datamaskinen siden den bare kan lagre et endelig
+  antall bits. Derfor får vi \emph{avrundingsfeil}
+\item ~
+  \hypertarget{int---datatypen-integer-eller-et-heltall.-i-motsetning-til-flyttall-kan-disse-representeres-nuxf8yaktig}{%
+  \subsection{\texorpdfstring{\texttt{int} - datatypen \emph{integer}
+  eller et heltall. I motsetning til flyttall kan disse representeres
+  nøyaktig!}{int - datatypen integer eller et heltall. I motsetning til flyttall kan disse representeres nøyaktig!}}\label{int---datatypen-integer-eller-et-heltall.-i-motsetning-til-flyttall-kan-disse-representeres-nuxf8yaktig}}
+\end{itemize}
+
+\hypertarget{ofte-brukte-kommandoer-og-pakker}{%
+\subsection{Ofte brukte kommandoer og
+pakker}\label{ofte-brukte-kommandoer-og-pakker}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{print(\textquotesingle{}tekst\ i\ en\ streng\ markert\ med\ enkle\ hermetegn\textquotesingle{})}
+  skriv ut strengen til terminal/kommandolinje/under kode-celle.
+\item
+  \texttt{input(\textquotesingle{}tekst\ som\ blir\ skrevet\ ut\ til\ bruker)}
+  skriv ut streng til bruker, og les inn input til programmet fra
+  bruker.
+\item
+  \texttt{import\ sys} importer pakken sys
+\item
+  \texttt{sys.argv} inneholder argumenter til programmet fra
+  kommandolinjen. Kan gis før programmet kjører og er lettere å endre
+  hvis programmet kjøres mange ganger
+\item
+  \texttt{from\ pylab\ import\ *} - importer alle funksjoner og
+  kommandoer fra pakken pylab.
+\item
+  \texttt{import\ pylab\ as\ pl} - importerer pakken pylab. Du får
+  tilgang til alle kommandoer fra pylab ved å f.eks skrive
+  \texttt{x\ =\ pl.linspace(-1,\ 1,\ 100)}
+\item
+  \texttt{\%\%writefile\ filename.py} skriver innholdet i en celle til
+  filen \texttt{filename.py}
+\item
+  \texttt{\%run\ filename.py} kjører programmet \texttt{filename.py} fra
+  en celle
+\end{itemize}
+
+\hypertarget{omgjuxf8ring-av-datatyper}{%
+\subsubsection{Omgjøring av datatyper}\label{omgjuxf8ring-av-datatyper}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{float(\textless{}input:\ streng,\ int,\ bool\textgreater{})}
+  omgjør argumentet til et flyttall
+\item
+  \texttt{int(\textless{}input:\ streng,\ bool\textgreater{})} omgjør
+  argumentet til et heltall
+\end{itemize}
+
+\hypertarget{avrunding}{%
+\subsection{Avrunding}\label{avrunding}}
+
+\begin{itemize}
+\item
+  \texttt{round(\textless{}input:\ float\ f\textgreater{},\ \textless{}input:\ int\ i\textgreater{})}
+  rund av et flyttall \texttt{f} til \(i\) desimaler etter komma.
+\item
+  Ofte sett i plotting: \texttt{N\ =\ int(ceil((xmax\ -\ xmin)/dx)))}
+  for å beregne antall punkter langs en akse i et intervall
+  \(\left[x_{\text{min}}, x_{\text{max}}\right)\) med avstand
+  \(\text{d}x\) mellom hvert punkt
+\end{itemize}
+
+\hypertarget{python-som-kalkulator}{%
+\subsection{Python som kalkulator}\label{python-som-kalkulator}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{a**b} beregner \(a^b\)
+\item
+  \texttt{a*b} beregner \(a\dot b\)
+\item
+  \texttt{a\ +\ b} beregner \(a + b\)
+\item
+  \texttt{a\ -\ b} beregner \(a - b\)
+\item
+  \texttt{(a\ -\ b)**2/4} beregner \(\displaystyle \frac{(a - b)^2}{4}\)
+\item
+  \texttt{sqrt,\ ln,\ log10,\ exp,\ sin,\ cos,\ tan,\ arcsin,\ arccos,\ arctan,\ sinh,\ cosh,\ tanh}
+  funksjoner tilgjengelig fra pylab
+\item
+  Beregn n'te rot \(^n\sqrt{x} = x^{1/n}\) ved å skrive
+  \texttt{x**(1/n)}
+\end{itemize}
+
+\hypertarget{plotting}{%
+\subsection{Plotting}\label{plotting}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{linspace}
+\item
+  \texttt{plot(x,\ y)}
+\item
+  \texttt{xlabel(\textquotesingle{}navn\ på\ x-akse\textquotesingle{})}
+\item
+  \texttt{ylabel(\textquotesingle{}navn\ på\ y-akse\textquotesingle{})}
+\item
+  \texttt{title(\textquotesingle{}tittel\textquotesingle{})}
+\item
+  \texttt{grid} vis rutenett
+\item
+  \texttt{show()} vis plottet
+\item
+  \texttt{figure()} lag nytt plot
+\end{itemize}
+
+    \hypertarget{generelle-luxe6ringsbeskrivelser}{%
+\subsection{Generelle
+læringsbeskrivelser}\label{generelle-luxe6ringsbeskrivelser}}
+
+Du har lært om følgende: * Skrive verdien av en variabel ut til brukeren
+* Lese inn data fra brukeren, både ``interaktivt'' med \texttt{input} og
+fra kommandolinja ved å bruke \texttt{sys.argv} * Gjøre om mellom
+datatyper, f.eks fra \texttt{int} til \texttt{float} eller fra
+\texttt{str} til \texttt{float} * Bruke python som kalkulator til enkle
+beregninger
+
+    \hypertarget{oppgaver}{%
+\section{Oppgaver}\label{oppgaver}}
+
+    \hypertarget{oppgave-1}{%
+\subsubsection{Oppgave 1}\label{oppgave-1}}
+
+Spør brukeren om navnet til brukeren. Skriv ut en hyggelig hilsen til
+brukeren som inneholder brukerens navn
+
+    \hypertarget{oppgave-2}{%
+\subsubsection{Oppgave 2}\label{oppgave-2}}
+
+I denne oppgaven skal du lese inn fornavn, etternavn og alder fra
+brukeren. Du skal kombinere disse for å skrive ut en hyggelig hilsen til
+brukeren. Du kan starte programmet med noe som ligner dette:
+
+    
+
+    
+
+    \hypertarget{oppgave-3}{%
+\subsubsection{Oppgave 3}\label{oppgave-3}}
+
+Skriv et program som spør brukeren om etternavn, fornavn og alder. Alle
+strenger har en funksjon \texttt{lower} som kan brukes på følgendem
+måte:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{etternavn} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Marchussen}\PY{l+s+s1}{\PYZsq{}}
+\PY{n}{etternavn}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    Programmet skal skrive ut etternavnet med små bokstaver
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{oppgave-4}{%
+\subsubsection{Oppgave 4}\label{oppgave-4}}
+
+Regn ut følgende verdier med python eller ipython
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{sqrt(3)}
+\item
+  \texttt{log10(10)}
+\item
+  \texttt{log10(1)}
+\item
+  \texttt{2*pi}
+\end{itemize}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Du kan skrive koden din her}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{oppgave-5}{%
+\subsubsection{Oppgave 5}\label{oppgave-5}}
+
+\hypertarget{a}{%
+\subparagraph{a)}\label{a}}
+
+Hva gjør koden under?
+
+\begin{verbatim}
+In [1]: from pylab import *
+
+In [2]: rad2deg(2*pi)
+Out[2]: 360.0
+
+In [3]: rad2deg(3*pi)
+Out[3]: 540.0
+
+In [4]: rad2deg(pi)
+Out[4]: 180.0
+
+In [5]: rad2deg(pi/2)
+Out[5]: 90.0
+
+In [6]: rad2deg(pi/4)
+Out[6]: 45.0
+
+In [7]: rad2deg(0)
+Out[7]: 0.0
+\end{verbatim}
+
+    \hypertarget{b}{%
+\subparagraph{b)}\label{b}}
+
+Hva tror du \texttt{rad2deg(pi/3)} vil gi ut? Du kan bruke cellen under
+eller i en egen ipython-terminal til å sjekke svaret ditt.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{pylab} \PY{k}{import} \PY{o}{*}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{oppgave-6}{%
+\subsubsection{Oppgave 6}\label{oppgave-6}}
+
+\hypertarget{a}{%
+\subparagraph{a)}\label{a}}
+
+Regn ut \texttt{deg2rad(0)} og \texttt{deg2rad(180)}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Hvis vi gir grader som input til trigonometriske funksjoner i python,
+får vi ikke riktig svar:
+
+\begin{verbatim}
+In [2]: from pylab import *
+In [2]: sin(180)
+Out[2]: -0.8011526357338304
+\end{verbatim}
+
+Hvis vi bruker funksjonen \texttt{deg2rad} på gradene slik at vi får
+vinkelen i radianer, går det bra.
+
+\hypertarget{b}{%
+\subparagraph{b)}\label{b}}
+
+Bruk funksjonen \texttt{deg2rad} og regn ut to eller flere av verdiene
+under
+
+\begin{align}
+\sin(30°) \\[1.1em]
+\sin(45°) - \frac{\sqrt2}{2} \label{exact1} \\[1.1em]
+\sin(60°) - \frac{\sqrt3}{2} \label{exact2} \\[1.1em]
+\sin(90°) \\[1.1em]
+\end{align}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{oppgave-7}{%
+\subsubsection{Oppgave 7}\label{oppgave-7}}
+
+I denne oppgaven undersøker vi hva funksjonen \texttt{abs} gjør.
+
+\begin{itemize}
+\item
+  Regn ut \texttt{abs(-1)}, \texttt{abs(-2)}, \texttt{abs(-5)}. Hva gjør
+  funksjonen?
+\item
+  Skriv inn kommandoen \texttt{abs?} i en ipython-terminal og les en
+  setning om funksjonen \texttt{abs}
+\end{itemize}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+abs\PY{o}{?}
+\end{Verbatim}
+\end{tcolorbox}
+
+    
+    \begin{verbatim}
+[1;31mSignature:[0m [0mabs[0m[1;33m([0m[0mx[0m[1;33m,[0m [1;33m/[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
+[1;31mDocstring:[0m Return the absolute value of the argument.
+[1;31mType:[0m      builtin_function_or_method
+
+    \end{verbatim}
+
+    
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{oppgave-8}{%
+\subsubsection{Oppgave 8}\label{oppgave-8}}
+
+\hypertarget{a}{%
+\subparagraph{a)}\label{a}}
+
+La \(G = 450000\), \(V = 0.88\) og \(n = 6\). Bruk ipython til å beregne
+verdien av \(N\), som er gitt ved likningen
+
+\[N = GV^n.\]
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Du kan skrive programmet ditt her}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{b}{%
+\subparagraph{b)}\label{b}}
+
+Lag et eksempel på en praktisk situasjon som passer til likningen i
+oppgave a).
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{oppgave-9}{%
+\subsubsection{Oppgave 9}\label{oppgave-9}}
+
+\hypertarget{a}{%
+\subparagraph{a)}\label{a}}
+
+La \(g = -9.81, h_0 = 40 \text{ og } t = 4.5\).
+
+La
+
+\[ h = h_0 + \frac{1}{2}gt^2.\]
+
+Fullfør ipython-økten under slik at den regner ut verdien av \(h\)
+
+\begin{verbatim}
+In [1]: g = -9.81
+
+In [2]: h_0 = 40
+
+In [3]: t = 4.5
+\end{verbatim}
+
+\hypertarget{b}{%
+\subparagraph{b)}\label{b}}
+
+Hvilken praktisk situasjon kan likningen i oppgave a) beskrive?
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{oppgave-10}{%
+\subsubsection{Oppgave 10}\label{oppgave-10}}
+
+Se på ipython-økten under.
+
+Kan du se hva som skjer?
+
+\begin{verbatim}
+In [1]: 1%4
+Out[1]: 1
+
+In [2]: 2%4
+Out[2]: 2
+
+In [3]: 3%4
+Out[3]: 3
+
+In [4]: 4%4
+Out[4]: 0
+
+In [5]: 5%4
+Out[5]: 1
+
+In [6]: 6%4
+Out[6]: 2
+
+In [7]: 7%4
+Out[7]: 3
+
+In [8]: 8%4
+Out[8]: 0
+
+In [9]: 9%4
+Out[9]: 1
+\end{verbatim}
+
+    \hypertarget{oppgave-11}{%
+\subsubsection{Oppgave 11}\label{oppgave-11}}
+
+\hypertarget{a}{%
+\subparagraph{a)}\label{a}}
+
+\begin{verbatim}
+1) Forklar hva programmet under gjør 
+2) Modifiser programmet slik at verdien av variabelen LHS blir skrevet ut
+\end{verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{24}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{x} \PY{o}{=} \PY{l+m+mi}{7}
+\PY{n}{y} \PY{o}{=} \PY{l+m+mi}{13}
+
+\PY{n}{LHS} \PY{o}{=} \PY{n}{x}\PY{o}{*}\PY{n}{y} \PY{o}{+} \PY{n}{x}\PY{o}{/}\PY{p}{(}\PY{n}{y} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{b}{%
+\subparagraph{b)}\label{b}}
+
+Skriv et program som tar inn to tall \(x\) og \(y\) fra brukeren, og
+regner ut en verdi for utrykket \(xy + x + y\)
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{oppgave-12}{%
+\subsubsection{Oppgave 12}\label{oppgave-12}}
+
+Skriv et program som tar inn to tall \(x\) og \(y\) og regner ut en
+verdi for utrykket \[xy + \frac{x + 2y}{3}\]
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{oppgave-13}{%
+\subsubsection{Oppgave 13}\label{oppgave-13}}
+
+Noen amerikanske og engelske matlagingsprogrammer har irriterende høy
+bruk av temperaturskaleaen fahrenheit. Formelen for å gjøre om fra
+fahrenheit til celcius er gitt ved
+
+\[ C = (F - 32)\cdot\frac{5}{9} \]
+
+Skriv et program som leser inn grader fahrenheit fra brukeren, og
+skriver ut temperaturen i grader celcius.
+
+    
+
+    \hypertarget{oppgave-14}{%
+\subsubsection{Oppgave 14}\label{oppgave-14}}
+
+I fysikken har du kanskje lært å bruke formelen
+
+\[ h(t) = h_0 + v_0t - \frac{1}{2}gt^2 \]
+
+\hypertarget{a}{%
+\subparagraph{a)}\label{a}}
+
+Se på koden under. Kan du fullføre den slik at det regnes ut en verdi
+for \(h\)?
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{g} \PY{o}{=} \PY{l+m+mf}{9.81}   \PY{c+c1}{\PYZsh{} tyngdens akselerasjon}
+\PY{n}{h\PYZus{}0} \PY{o}{=} \PY{l+m+mf}{4.0}  \PY{c+c1}{\PYZsh{} starthøyde}
+\PY{n}{v\PYZus{}0} \PY{o}{=} \PY{l+m+mf}{3.4}  \PY{c+c1}{\PYZsh{} vertikal start\PYZhy{}fart}
+
+\PY{n}{h} \PY{o}{=} \PY{n}{h\PYZus{}0} \PY{o}{+} \PY{n}{v\PYZus{}0} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.5}\PY{o}{*}\PY{o}{.}\PY{o}{.}\PY{o}{.}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{b}{%
+\subparagraph{b)}\label{b}}
+
+Hvilke verdier vil variere fra kast til kast? Les disse verdiene inn fra
+brukeren, og regn ut hvor høyden. Skriv dette ut i en lesbar forståelig
+melding til brukeren.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{c}{%
+\subparagraph{c)}\label{c}}
+
+Utvid programmet fra b) slik at det leser inn den totale farten og
+utgangsvinkelen på kastet. Bruk en parameterfremstilling til å regne ut
+posisjonen etter \(t\) sekunder.
+
+Skriv denne posisjonen ut til brukeren
+
+Du kan bli nødt til å importere funksjoner fra pakken \texttt{pylab}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{47}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{pylab} \PY{k}{import} \PY{o}{*}
+\PY{c+c1}{\PYZsh{} skriv resten av koden under her...}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{oppgave-15}{%
+\subsubsection{Oppgave 15}\label{oppgave-15}}
+
+Under har Pål prøvd å skrive et program, men han får en feilmelding.
+\#\#\#\#\# a) Hjelp Pål med å reparere programmet
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}gjør om mellom lysår og kilometer}
+
+\PY{n}{light\PYZus{}year} \PY{o}{=} \PY{l+m+mf}{9460730472580.8} \PY{c+c1}{\PYZsh{} ett lysår målt i km}
+
+\PY{n}{distance\PYZus{}light\PYZus{}years} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Write the distance in light years:  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{n}{distance\PYZus{}kilometers} \PY{o}{=} \PY{n}{distance\PYZus{}light\PYZus{}years}\PY{o}{*}\PY{n}{light\PYZus{}year}
+
+\PY{c+c1}{\PYZsh{} print distansen i antall kilometer på stanardform}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{distansen i km er: }\PY{l+s+si}{\PYZob{}distance\PYZus{}kilometers:g\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    I den siste linjen bruker vi en spesiell formatering av strenger. For å
+fortelle python at vi skal bruke en f-streng, setter vi bokstaven f
+foran strengen.
+
+\hypertarget{b}{%
+\subparagraph{b)}\label{b}}
+
+Fjern tegnene kolon og g (\texttt{:} og \texttt{g}) i siste linjen i
+programmet. Hva skjer?
+
+\hypertarget{mer-om-f-strings}{%
+\subparagraph{Mer om f-strings}\label{mer-om-f-strings}}
+
+Vi vil komme tilbake til bruk av f-strings senere. Hvis du er nysjerrig
+- kan du se en video av
+\href{https://www.youtube.com/watch?v=nghuHvKLhJA}{Corey Shafer om
+f-strenger}. Videoen antar at du har hatt litt mer om dictionaries og
+løkker, men dette er ikke essensielt for innholdet i videoen. Du kan
+enten se begynnelsen av filmen og spare resten til senere, eller hvis du
+klarer å holde deg rolig uten å forstå alle detaljene kan du kanskje ha
+utbytte av flere deler av videoen.
+
+    \hypertarget{oppgave-16}{%
+\subsubsection{Oppgave 16}\label{oppgave-16}}
+
+I denne oppgaven skal vi se litt på \emph{objekter}. I python er alt
+objekter. Det betyr at alle variabler du lager, har et sett innebygde
+\emph{metoder} som avhenger av hvilken datatype (f.eks \texttt{int},
+\texttt{float} eller \texttt{str}) variabelen inneholder. For eksempel
+har en variabel som inneholder datatypen streng blant annet metodene
+\texttt{startswith}, \texttt{endswith}, \texttt{find} og
+\texttt{replace}. Se figuren under.
+\includegraphics{attachment:image.png}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Bruk et ipython-shell og lag gjør følgende tilordning
+\end{enumerate}
+
+\begin{verbatim}
+fornavn = 'doNAlDinhO'
+\end{verbatim}
+
+Skriv \texttt{dir(fornavn)}, får du alle metodene til objektet
+\texttt{fornavn}
+
+Skriv \texttt{help(fornavn.startswith)}. Du får ut en teknisk manual for
+hvordan metoden brukes.
+
+Skriv \texttt{fornavn.startswith(\textquotesingle{}doN}) og
+\texttt{fornavn.startswith(\textquotesingle{}don\textquotesingle{})}.
+Hva betyr svarene?
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Skriv et program som spør brukeren om en tekst. Programmet skal skrive
+  teksten ut igjen med store bokstaver.
+\end{enumerate}
+
+    \hypertarget{oppgave-17}{%
+\subsubsection{Oppgave 17}\label{oppgave-17}}
+
+Strenger har også metoden \texttt{replace}. En av vennen dine har
+skrevet en lang tekst, der minst to ord er skrevet feil.
+
+\texttt{Mari\ gik\ till\ skolen.\ Hun\ gik\ klokka\ åtte.\ På\ skolen\ hadde\ hun\ mattematikk,\ nrosk,\ engelsk\ og\ gym.\ På\ ettermiddagen\ gikk\ Mari\ hjem.\ Når\ hun\ gik\ hjem,\ drodde\ hun\ innom\ en\ butik.\ På\ butiken\ kjøpte\ hun\ en\ baget\ med\ laks\ og\ egg.\ Når\ Mari\ kom\ hjem,\ gjorde\ hun\ nrosk\ leksa\ før\ hun\ så\ hun\ på\ TV.\ Programmet\ handlet\ om\ en\ full\ man\ som\ gik\ rundt\ i\ en\ stue,\ og\ sa\ "same\ procedure\ as\ last\ year!".\ I\ stua\ satt\ det\ en\ dame\ og\ skålte\ for\ \ Lord\ Pomeroy\ og\ andre\ venner.\ Hun\ sa\ alltid\ "same\ procedure\ as\ everey\ year,\ James!"\ Mari\ kom\ alltid\ i\ jule\ stemmning\ når\ hun\ så\ dete\ programmet.\ På\ kvelden\ ringte\ bestemor\ till\ Mari.\ Di\ snakket\ lenge\ i\ telefonen.\ Det\ var\ lenge\ siden\ di\ hadde\ snakket\ med\ verandre.\ I\ sommerfeiren\ pleide\ Mari\ og\ besøke\ bestemoren\ og\ slekta.\ Da\ brukte\ di\ å\ kjøre\ bil\ till\ bestemor.\ Bestemor\ var\ også\ kommet\ i\ jule\ stemmning,\ så\ de\ hade\ mye\ å\ snakke\ om.\ Etterpå\ sa\ di\ hade\ bra\ till\ verandre.}.
+
+Se etter noen ord som ofte er skrevet feil. Bruk python og metoden
+\texttt{str.replace} til å rydde \emph{litt} i teksten slik at den ser
+noe bedre ut.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{22}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} du kan løse oppgaven her, kopier teksten og sett den inn i variabelen \PYZdq{}tekst\PYZdq{}}
+
+\PY{n}{tekst} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{l+s+s2}{Mari gik till skolen. Hun gik klokka åtte. På skolen hadde hun mattematikk, nrosk, engelsk og gym. På ettermiddagen gikk Mari hjem. Når hun gik hjem, drodde hun innom en butik. På butiken kjøpte hun en}
+\PY{l+s+s2}{baget med laks og egg. Når Mari kom hjem, gjorde hun nrosk leksa før hun så hun på TV. Programmet handlet om en full man som gik rundt i}
+\PY{l+s+s2}{en stue, og sa }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{same procedure as last year!}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{. I stua satt det en dame og skålte for Lord Pomeroy og andre}
+\PY{l+s+s2}{venner. Hun sa alltid }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{same procedure as everey year, James!}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Mari kom alltid i jule stemmning når hun så dete }
+\PY{l+s+s2}{programmet. På kvelden ringte bestemor till Mari. Di snakket lenge i telefonen. Det var lenge siden di hadde snakket sammen.}
+\PY{l+s+s2}{I sommerfeiren pleide Mari og besøke bestemoren og slekta. Da brukte di å kjøre bil till bestemor. Bestemor var også kommet}
+\PY{l+s+s2}{i jule stemmning, så de hade mye å snakke om. Etterpå sa di hade bra till hverandre.}
+\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+
+\PY{c+c1}{\PYZsh{} Fortsett med å erstatte flere ord under}
+\PY{n}{tekst}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gik}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gikk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{22}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+'Mari gikk till skolen. Hun gikk klokka åtte. På skolen hadde hun mattematikk,
+nrosk, engelsk og gym. På ettermiddagen gikkk Mari hjem. Når hun gikk hjem,
+drodde hun innom en butik. På butiken kjøpte hun en\textbackslash{}nbaget med laks og egg. Når
+Mari kom hjem, gjorde hun nrosk leksa før hun så hun på TV. Programmet handlet
+om en full man som gikk rundt i\textbackslash{}nen stue, og sa "same procedure as last year!".
+I stua satt det en dame og skålte for Lord Pomeroy og andre\textbackslash{}nvenner. Hun sa
+alltid "same procedure as everey year, James!" Mari kom alltid i jule stemmning
+når hun så dete \textbackslash{}nprogrammet. På kvelden ringte bestemor till Mari. Di snakket
+lenge i telefonen. Det var lenge siden di hadde snakket sammen.\textbackslash{}nI sommerfeiren
+pleide Mari og besøke bestemoren og slekta. Da brukte di å kjøre bil till
+bestemor. Bestemor var også kommet\textbackslash{}ni jule stemmning, så de hade mye å snakke
+om. Etterpå sa di hade bra till hverandre.\textbackslash{}n'
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \textbf{Refleksjon}: Kan du komme på tilfeller der
+  \texttt{str.replace} vil bytte ut ord som faktisk er riktige? Finnes
+  det særtrekk for disse tilfellene? Kan du for noen slike ord beskrive
+  en \emph{systematisk} måte å unngå å bytte ut feil ord? Du skal ikke
+  skrive kode, bare gi en systematisk fremgangsmåte.
+\end{enumerate}
+
+    
+
+    \hypertarget{oppgave-18}{%
+\subsubsection{Oppgave 18}\label{oppgave-18}}
+
+Modifiser programmet til Pål i oppgave 15 slik at den leser inn
+informasjon fra kommandolinja
+
+    \hypertarget{oppgave-19}{%
+\subsubsection{Oppgave 19}\label{oppgave-19}}
+
+I denne oppgaven må du modifesere programmet
+\texttt{aplot\_andergradsfunksjon.py}. Du kan selvfølgelig velge å
+heller modifisere programmet \texttt{plot\_andregradsfunksjon.py}.
+
+Vi skal starte med å stille opp en annen matematisk modell. Du har
+følgende scenarie:
+
+Antall bakterier i en bakteriekultur er ved morgenen klokken 8.00 målt
+til 12 000 bakterier. Klokken 10.00 er antall bakterier målt til 13 000
+bakterier.
+
+\hypertarget{a}{%
+\subparagraph{a)}\label{a}}
+
+Still opp to ulike modeller \(A(t)\) og \(B(t)\) for antall bakterier i
+bakteriekulturen. For hver modell skal du tegne grafen til modellen.
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Tenk gjennom følgende for hver av modellene:
+
+\begin{itemize}
+\tightlist
+\item
+  Hvilken informasjon trenger du fra brukeren for å tegne grafen?
+\item
+  Hva må endres i programmet?
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{c}{%
+\subparagraph{c)}\label{c}}
+
+Velg modellen fra oppgave b) du syns er mest realistisk.
+
+Gjør de nødvendige endringene i programmet slik at du kan plotte grafen
+til funksjonen.
+
+Lagre endringene i et nytt program \texttt{plot\_bakteriepopulasjon.py}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{15}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{\PYZpc{}\PYZpc{}writefile} plot\PYZus{}bakteriepopulasjon.py
+\PY{c+c1}{\PYZsh{} Du kan skrive koden din her}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Writing plot\_bakteriepopulasjon.py
+    \end{Verbatim}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \hypertarget{oppave-20}{%
+\subsubsection{Oppave 20}\label{oppave-20}}
+
+Les inn noen data for loddrett kast i programmet over og plot grafen
+slik at du får høyde over bakken på y-aksen som funksjon av tiden etter
+kastet i sekunder på x-aksen.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+\end{document}

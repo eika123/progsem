@@ -1,3 +1,10 @@
 .vscode/launch.json
 .vscode/settings.json
-tournament_manager/games.txt
+
+
+# ignore latex trash
+.out
+.log
+.aux
+
+
